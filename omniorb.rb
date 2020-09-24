@@ -31,6 +31,7 @@ class Omniorb < Formula
         OEPNSSL_LIBS=-L/usr/local/opt/openssl/lib
         CC=gcc-4.9
         CXX=g++-4.9
+        PYTHON=/usr/local/bin/python3
     ]
     system "./configure", "--prefix=#{prefix}", "--with-openssl=/usr/local/opt/openssl", *args
     system "make"
