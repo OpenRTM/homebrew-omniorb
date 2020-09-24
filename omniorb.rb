@@ -18,6 +18,7 @@ class Omniorb < Formula
   end
 
   depends_on "pkg-config" => :build
+  depends_on "python3"
 
   resource "bindings" do
     url "https://downloads.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.2.4/omniORBpy-4.2.4.tar.bz2"
@@ -25,12 +26,18 @@ class Omniorb < Formula
   end
 
   def install
-    system "./configure", "--prefix=#{prefix}", "--with-openssl"
+    args = %W[
+        OPENSSL_CFLAGS=-I/usr/local/opt/openssl/include
+        OEPNSSL_LIBS=-L/usr/local/opt/openssl/lib
+        CC=gcc-4.9
+        CXX=g++-4.9
+    ]
+    system "./configure", "--prefix=#{prefix}", "--with-openssl=/usr/local/opt/openssl", *args
     system "make"
     system "make", "install"
 
     resource("bindings").stage do
-      system "./configure", "--prefix=#{prefix}", "--with-openssl"
+      system "./configure", "--prefix=#{prefix}", "--with-openssl=/usr/local/opt/openssl", *args
       system "make", "install"
     end
   end
