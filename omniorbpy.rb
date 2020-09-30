@@ -8,7 +8,7 @@ class Omniorbpy < Formula
   sha256 "dae8d867559cc934002b756bc01ad7fabbc63f19c2d52f755369989a7a1d27b6"
   license ""
 
-  depends_on "omniorb"
+  depends_on "omniorb-ssl"
   depends_on "python3"
 
 
