@@ -1,5 +1,5 @@
-class Omniorb < Formula
-  desc "IOR and naming service utilities for omniORB"
+class OmniorbSsl < Formula
+  desc "IOR and naming service utilities for omniORB with SSL"
   homepage "https://omniorb.sourceforge.io/"
   url "https://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.2.4/omniORB-4.2.4.tar.bz2"
   sha256 "28c01cd0df76c1e81524ca369dc9e6e75f57dc70f30688c99c67926e4bdc7a6f"
@@ -10,14 +10,8 @@ class Omniorb < Formula
     regex(%r{url=.*?/omniORB[._-]v?(\d+(?:\.\d+)+(?:-\d+)?)\.t}i)
   end
 
-  bottle do
-    cellar :any
-    sha256 "a467b416e7657794555b547ee7caf8f0395e67ecf7501b393d29c620598af535" => :catalina
-    sha256 "cb9ddb09f1d53ac587cd9eb83e198757350d8d1432cfa8c3f091a3ab78f0c922" => :mojave
-    sha256 "e7465503bce133c41d4f122107e22559a5e82785f0a3af7747da8ccc44975035" => :high_sierra
-  end
-
   depends_on "pkg-config" => :build
+  depends_on "openssl"
   depends_on "python3"
 
   resource "bindings" do
