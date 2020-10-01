@@ -1,17 +1,31 @@
-# Documentation: https://docs.brew.sh/Formula-Cookbook
-#                https://rubydoc.brew.sh/Formula
-# PLEASE REMOVE ALL GENERATED COMMENTS BEFORE SUBMITTING YOUR PULL REQUEST!
+#============================================================
+# omniORBpy formula for HomeBrew
+#
+# Author: Noriaki Ando <Noriaki.Ando@gmail.com>
+# GitHub: https://github.com/OpenRTM/homebrew-omniorb
+#============================================================
 class Omniorbpy < Formula
-  desc ""
-  homepage ""
+  desc "IOR and naming service utilities for omniORBpy with SSL"
+  homepage "https://omniorb.sourceforge.io/"
   url "https://versaweb.dl.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.2.4/omniORBpy-4.2.4.tar.bz2"
   sha256 "dae8d867559cc934002b756bc01ad7fabbc63f19c2d52f755369989a7a1d27b6"
-  license ""
+  license "GPL-2.1"
 
+  livecheck do
+    url :stable
+    regex(%r{url=.*?/omniORBpy[._-]v?(\d+(?:\.\d+)+(?:-\d+)?)\.t}i)
+  end
+
+  depends_on "pkg-config" => :build
   depends_on "omniorb-ssl"
   depends_on "python3"
 
-
+  bottle do
+    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.2.4/"
+    cellar :any
+    sha256 "d9b6a0902ec93a78f81b26c5fb0f24bc0f500388af8ab60c0eb3168cf1f0f881" => :catalina
+  end
+ 
   def install
     args = %W[
         OPENSSL_CFLAGS=-I/usr/local/opt/openssl/include
@@ -20,8 +34,6 @@ class Omniorbpy < Formula
         CXX=g++-4.9
         PYTHON=/usr/local/bin/python3
     ]
-    # ENV.deparallelize  # if your formula fails when building in parallel
-    # Remove unrecognized options if warned by configure
     system "./configure", "--disable-debug",
                           "--disable-dependency-tracking",
                           "--disable-silent-rules",
@@ -34,15 +46,6 @@ class Omniorbpy < Formula
   end
 
   test do
-    # `test do` will create, run in and delete a temporary directory.
-    #
-    # This test will fail and we won't accept that! For Homebrew/homebrew-core
-    # this will need to be a test that verifies the functionality of the
-    # software. Run the test with `brew test omniORBpy`. Options passed
-    # to `brew install` such as `--HEAD` also need to be provided to `brew test`.
-    #
-    # The installed folder is not in the path, so use the entire path to any
-    # executables being tested: `system "#{bin}/program", "do", "something"`.
-    system "false"
+    system "#{bin}/omniidl", "-bpython", "-h"
   end
 end
