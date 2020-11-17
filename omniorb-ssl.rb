@@ -18,7 +18,7 @@ class OmniorbSsl < Formula
 
   depends_on "pkg-config" => :build
   depends_on "openssl"
-  depends_on "python3"
+  depends_on "python@3.8"
 
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.2.4/"
