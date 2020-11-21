@@ -18,12 +18,13 @@ class OmniorbSsl < Formula
 
   depends_on "pkg-config" => :build
   depends_on "openssl"
-  depends_on "python@3.8"
+  depends_on "python@3.9"
 
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.2.4/"
     cellar :any
-    sha256 "7abf3c569e57046ad8189b405b624fa53d3b488287ed7a44420cfe6882b3843c" => :catalina
+    rebuild 1
+    sha256 "90bf3cbd54b14f5cc71e6f269d27a1c40a21bfd7cab39f7895f73aa212666b71" => :catalina
   end
 
   resource "bindings" do
