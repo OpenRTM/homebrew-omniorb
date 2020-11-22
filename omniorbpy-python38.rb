@@ -4,7 +4,7 @@
 # Author: Noriaki Ando <Noriaki.Ando@gmail.com>
 # GitHub: https://github.com/OpenRTM/homebrew-omniorb
 #============================================================
-class OmniorbpyAtPy38 < Formula
+class OmniorbpyPython38 < Formula
   desc "IOR and naming service utilities for omniORBpy with SSL"
   homepage "https://omniorb.sourceforge.io/"
   url "https://versaweb.dl.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.2.4/omniORBpy-4.2.4.tar.bz2"
@@ -20,11 +20,11 @@ class OmniorbpyAtPy38 < Formula
   depends_on "omniorb-ssl"
   depends_on "python@3.8"
 
-  bottle do
-    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.2.4/"
-    cellar :any
-    sha256 "d9b6a0902ec93a78f81b26c5fb0f24bc0f500388af8ab60c0eb3168cf1f0f881" => :catalina
-  end
+#  bottle do
+#    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.2.4/"
+#    cellar :any
+#    sha256 "d9b6a0902ec93a78f81b26c5fb0f24bc0f500388af8ab60c0eb3168cf1f0f881" => :catalina
+#  end
  
   def install
     args = %W[
@@ -32,7 +32,7 @@ class OmniorbpyAtPy38 < Formula
         OEPNSSL_LIBS=-L/usr/local/opt/openssl/lib
         CC=gcc-4.9
         CXX=g++-4.9
-        PYTHON=/usr/local/bin/python3
+        PYTHON=/usr/local/bin/python3.8
     ]
     system "./configure", "--disable-debug",
                           "--disable-dependency-tracking",
