@@ -4,7 +4,7 @@
 # Author: Noriaki Ando <Noriaki.Ando@gmail.com>
 # GitHub: https://github.com/OpenRTM/homebrew-omniorb
 #============================================================
-class OmniorbpyAt38 < Formula
+class OmniorbpyAtPy38 < Formula
   desc "IOR and naming service utilities for omniORBpy with SSL"
   homepage "https://omniorb.sourceforge.io/"
   url "https://versaweb.dl.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.2.4/omniORBpy-4.2.4.tar.bz2"
