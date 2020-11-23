@@ -9,7 +9,7 @@
 # $ brew unlink python3 (unlink python 3.9)
 # $ brew link python@3.8
 #============================================================
-class OmniorbpyPython38 < Formula
+class OmniorbpyPy38 < Formula
   desc "IOR and naming service utilities for omniORBpy with SSL"
   homepage "https://omniorb.sourceforge.io/"
   url "https://versaweb.dl.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.2.4/omniORBpy-4.2.4.tar.bz2"
@@ -22,13 +22,13 @@ class OmniorbpyPython38 < Formula
   end
 
   depends_on "pkg-config" => :build
-  depends_on "omniorb-ssl-python38"
+  depends_on "omniorb-ssl-py38"
   depends_on "python@3.8"
 
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.2.4/"
     cellar :any
-    sha256 "7da26b117e9c61f0c63df893ce8fdd5443337cb2b18a6202a935b49faba27bf0" => :catalina
+    sha256 "63592f05f70e89f59c07f4170a304f7a071a2d95813af8104a0bbb1e5af98df3" => :catalina
   end
  
   def install
@@ -48,7 +48,7 @@ class OmniorbpyPython38 < Formula
                           "--with-omniorb=/usr/local",
                           "--with-openssl=/usr/local/opt/openssl",
                           *args
-    system "make"
+    system "make", "-j", "4"
     system "make", "install"
   end
 

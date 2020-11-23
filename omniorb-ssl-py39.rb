@@ -3,13 +3,8 @@
 #
 # Author: Noriaki Ando <Noriaki.Ando@gmail.com>
 # GitHub: https://github.com/OpenRTM/homebrew-omniorb
-#
-# This is the formula for omniORBpy on python3.8 (not 3.9).
-# To use this formula/bottle, switch python 3.9 to python 3.8.
-# $ brew unlink python3 (unlink python 3.9)
-# $ brew link python@3.8
 #============================================================
-class OmniorbSslPython38 < Formula
+class OmniorbSslPy39 < Formula
   desc "IOR and naming service utilities for omniORB with SSL"
   homepage "https://omniorb.sourceforge.io/"
   url "https://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.2.4/omniORB-4.2.4.tar.bz2"
@@ -22,13 +17,13 @@ class OmniorbSslPython38 < Formula
   end
 
   depends_on "pkg-config" => :build
-  depends_on "openssl@1.1"
-  depends_on "python@3.8"
-  
+  depends_on "openssl"
+  depends_on "python@3.9"
+
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.2.4/"
     cellar :any
-    sha256 "3299e5324a3f888cfe9bb1c81c5aee0dd53924a3c3c45987746c4fd0f2733d4f" => :catalina
+    sha256 "86adfc9c67436e92626a12e98cf5e40d36ad7a09f7a973e5fd98182c24ace9a9" => :catalina
   end
 
   resource "bindings" do
@@ -40,14 +35,14 @@ class OmniorbSslPython38 < Formula
     args = %W[
         OPENSSL_CFLAGS=-I/usr/local/opt/openssl/include
         OEPNSSL_LIBS=-L/usr/local/opt/openssl/lib
-        CFLAGS=-I/usr/local/opt/python@3.8/include
-        LDFLAGS=-L/usr/local/opt/python@3.8/lib
+        CFLAGS=-I/usr/local/opt/python@3.9/include
+        LDFLAGS=-L/usr/local/opt/python@3.9/lib
         CC=gcc-4.9
         CXX=g++-4.9
-        PYTHON=/usr/local/opt/python\@3.8/bin/python3.8
+        PYTHON=/usr/local/opt/python@3.9/bin/python3.9
     ]
     system "./configure", "--prefix=#{prefix}", "--with-openssl=/usr/local/opt/openssl", *args
-    system "make"
+    system "make", "-j", "4"
     system "make", "install"
 
     resource("bindings").stage do

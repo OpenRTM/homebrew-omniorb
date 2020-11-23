@@ -4,7 +4,7 @@
 # Author: Noriaki Ando <Noriaki.Ando@gmail.com>
 # GitHub: https://github.com/OpenRTM/homebrew-omniorb
 #============================================================
-class Omniorbpy < Formula
+class OmniorbpyPy39 < Formula
   desc "IOR and naming service utilities for omniORBpy with SSL"
   homepage "https://omniorb.sourceforge.io/"
   url "https://versaweb.dl.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.2.4/omniORBpy-4.2.4.tar.bz2"
@@ -23,10 +23,9 @@ class Omniorbpy < Formula
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.2.4/"
     cellar :any
-    rebuild 2
-    sha256 "30e690981419c1cd38f45772d10fca72b28eff9d593f4a412abdaa208d10c197" => :catalina
+    sha256 "ab1c2958160d0ab613271454c9b2fb5bf7b745a30f8bf6b0b7876bb111708d8f" => :catalina
   end
-  
+ 
   def install
     args = %W[
         OPENSSL_CFLAGS=-I/usr/local/opt/openssl/include
