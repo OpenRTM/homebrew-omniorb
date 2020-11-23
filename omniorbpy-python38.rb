@@ -1,8 +1,13 @@
 #============================================================
-# omniORBpy formula for HomeBrew
+# omniORBpy (for python3.8) formula for HomeBrew
 #
 # Author: Noriaki Ando <Noriaki.Ando@gmail.com>
 # GitHub: https://github.com/OpenRTM/homebrew-omniorb
+#
+# This is the formula for omniORBpy on python3.8 (not 3.9).
+# To use this formula/bottle, switch python 3.9 to python 3.8.
+# $ brew unlink python3 (unlink python 3.9)
+# $ brew link python@3.8
 #============================================================
 class OmniorbpyPython38 < Formula
   desc "IOR and naming service utilities for omniORBpy with SSL"
@@ -17,22 +22,24 @@ class OmniorbpyPython38 < Formula
   end
 
   depends_on "pkg-config" => :build
-  depends_on "omniorb-ssl"
+  depends_on "omniorb-ssl-python38"
   depends_on "python@3.8"
 
-#  bottle do
-#    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.2.4/"
-#    cellar :any
-#    sha256 "d9b6a0902ec93a78f81b26c5fb0f24bc0f500388af8ab60c0eb3168cf1f0f881" => :catalina
-#  end
+  bottle do
+    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.2.4/"
+    cellar :any
+    sha256 "7da26b117e9c61f0c63df893ce8fdd5443337cb2b18a6202a935b49faba27bf0" => :catalina
+  end
  
   def install
     args = %W[
         OPENSSL_CFLAGS=-I/usr/local/opt/openssl/include
         OEPNSSL_LIBS=-L/usr/local/opt/openssl/lib
+        CFLAGS=-I/usr/local/opt/python@3.8/include
+        LDFLAGS=-L/usr/local/opt/python@3.8/lib
         CC=gcc-4.9
         CXX=g++-4.9
-        PYTHON=/usr/local/bin/python3.8
+        PYTHON=/usr/local/opt/python@3.8/bin/python3.8
     ]
     system "./configure", "--disable-debug",
                           "--disable-dependency-tracking",
