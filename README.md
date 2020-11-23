@@ -6,7 +6,15 @@ This is [homebrew](https://brew.sh/) tap repository for OpenSSL enabled omniORB/
 Currently the following versions of omniORBs are provided.
 
 - omniORB-4.2.4
+  - on Python 3.8
+  - on Python 3.9
 - omniORBpy-4.2.4
+  - on Python 3.8
+  - on Python 3.9
+
+Since the omniidl depends on python, please select the appropriate
+bottles of omniORB/omniORBpy which support specific python versions.
+Current latest homebrew's python version is 3.9.
 
 ## How to install
 
@@ -16,8 +24,10 @@ $ brew update
 $ brew install openssl
 $ brew link openssl
 $ brew uninstall omniorb
-$ brew tap openrtm/omniorb
-$ brew install openrtm/omniorb-ssl
+$ brew install openrtm/omniorb/omniorb-ssl
+or
+$ brew install openrtm/omniorb/omniorb-ssl-pyXX
+-> XX is the python version you want (py38 or py39)
 $ brew link omniorb-ssl
 ```
 
@@ -27,10 +37,11 @@ $ brew update
 $ brew install openssl
 $ brew link openssl
 $ brew uninstall omniorb
-$ brew tap openrtm/omniorb
-$ brew install openrtm/omniorb-ssl
+$ brew install openrtm/omniorb/omniorbpy
+or
+$ brew install openrtm/omniorb/omniorbpy-pyXX
+-> XX is the python version you want (py38 or py39)
 $ brew link omniorb-ssl
-$ brew install openrtm/omniorbpy
 $ brew link omniorbpy
 ```
 
