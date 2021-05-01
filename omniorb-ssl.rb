@@ -16,16 +16,15 @@ class OmniorbSsl < Formula
     regex(%r{url=.*?/omniORB[._-]v?(\d+(?:\.\d+)+(?:-\d+)?)\.t}i)
   end
 
+  bottle do
+    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.2.4/"
+    rebuild 2
+    sha256 cellar: :any, catalina: "c378d22e9ada03c3cb1739ed9693d81ae4fbc1ea1d217e0514f59648ff0ecced"
+  end
+
   depends_on "pkg-config" => :build
   depends_on "openssl"
   depends_on "python@3.9"
-
-  bottle do
-    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.2.4/"
-    cellar :any
-    rebuild 2
-    sha256 "c378d22e9ada03c3cb1739ed9693d81ae4fbc1ea1d217e0514f59648ff0ecced" => :catalina
-  end
 
   resource "bindings" do
     url "https://downloads.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.2.4/omniORBpy-4.2.4.tar.bz2"
@@ -33,14 +32,14 @@ class OmniorbSsl < Formula
   end
 
   def install
-    args = %W[
-        OPENSSL_CFLAGS=-I/usr/local/opt/openssl/include
-        OEPNSSL_LIBS=-L/usr/local/opt/openssl/lib
-        CFLAGS=-I/usr/local/opt/python@3.9/include
-        LDFLAGS=-L/usr/local/opt/python@3.9/lib
-        CC=gcc-4.9
-        CXX=g++-4.9
-        PYTHON=/usr/local/opt/python@3.9/bin/python3.9
+    args = %w[
+      OPENSSL_CFLAGS=-I/usr/local/opt/openssl/include
+      OEPNSSL_LIBS=-L/usr/local/opt/openssl/lib
+      CFLAGS=-I/usr/local/opt/python@3.9/include
+      LDFLAGS=-L/usr/local/opt/python@3.9/lib
+      CC=gcc-4.9
+      CXX=g++-4.9
+      PYTHON=/usr/local/opt/python@3.9/bin/python3.9
     ]
     system "./configure", "--prefix=#{prefix}", "--with-openssl=/usr/local/opt/openssl", *args
     system "make", "-j", "4"
@@ -56,4 +55,3 @@ class OmniorbSsl < Formula
     system "#{bin}/omniidl", "-bcxx", "-h"
   end
 end
-
