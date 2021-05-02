@@ -16,26 +16,25 @@ class Omniorbpy < Formula
     regex(%r{url=.*?/omniORBpy[._-]v?(\d+(?:\.\d+)+(?:-\d+)?)\.t}i)
   end
 
+  bottle do
+    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.2.4/"
+    rebuild 2
+    sha256 cellar: :any, catalina: "30e690981419c1cd38f45772d10fca72b28eff9d593f4a412abdaa208d10c197"
+  end
+
   depends_on "pkg-config" => :build
   depends_on "omniorb-ssl"
   depends_on "python@3.9"
 
-  bottle do
-    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.2.4/"
-    cellar :any
-    rebuild 2
-    sha256 "30e690981419c1cd38f45772d10fca72b28eff9d593f4a412abdaa208d10c197" => :catalina
-  end
-  
   def install
-    args = %W[
-        OPENSSL_CFLAGS=-I/usr/local/opt/openssl/include
-        OEPNSSL_LIBS=-L/usr/local/opt/openssl/lib
-        CFLAGS=-I/usr/local/opt/python@3.9/include
-        LDFLAGS=-L/usr/local/opt/python@3.9/lib
-        CC=gcc-4.9
-        CXX=g++-4.9
-        PYTHON=/usr/local/opt/python@3.9/bin/python3.9
+    args = %w[
+      OPENSSL_CFLAGS=-I/usr/local/opt/openssl/include
+      OEPNSSL_LIBS=-L/usr/local/opt/openssl/lib
+      CFLAGS=-I/usr/local/opt/python@3.9/include
+      LDFLAGS=-L/usr/local/opt/python@3.9/lib
+      CC=gcc-4.9
+      CXX=g++-4.9
+      PYTHON=/usr/local/opt/python@3.9/bin/python3.9
     ]
     system "./configure", "--disable-debug",
                           "--disable-dependency-tracking",
