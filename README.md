@@ -45,3 +45,10 @@ $ brew link omniorb-ssl
 $ brew link omniorbpy
 ```
 
+
+## How to build package (bottling)
+
+```shell
+$ brew install --build-bottle openrtm/omniorb/omniorb-ssl
+$ brew bottle openrtm/omniorb/omniorb-ssl
+```
