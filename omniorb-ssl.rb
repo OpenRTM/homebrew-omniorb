@@ -10,7 +10,7 @@ class OmniorbSsl < Formula
   url "https://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.2.4/omniORB-4.2.4.tar.bz2"
   sha256 "28c01cd0df76c1e81524ca369dc9e6e75f57dc70f30688c99c67926e4bdc7a6f"
 
-  license "GPL-2.1"
+  license any_of: ["GPL-2.0-only", "LGPL-2.1-only"]
 
   livecheck do
     url :stable
@@ -28,6 +28,7 @@ class OmniorbSsl < Formula
   depends_on "pkg-config" => :build
   depends_on "openssl"
   depends_on "python@3.9"
+  depends_on ""
 
   resource "bindings" do
     url "https://downloads.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.2.4/omniORBpy-4.2.4.tar.bz2"
@@ -37,7 +38,7 @@ class OmniorbSsl < Formula
   def install
     pyincludes = `python3-config --includes`.chomp
     pylib = `python3-config --ldflags`.chomp
-    brew_prefix=`/opt/homebrew/bin/brew --prefix`.chomp
+    brew_prefix=`brew --prefix`.chomp
     args = %W[
       CFLAGS=#{pyincludes}
       LDFLAGS=#{pylib}
