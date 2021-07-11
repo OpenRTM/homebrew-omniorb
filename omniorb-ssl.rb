@@ -28,7 +28,6 @@ class OmniorbSsl < Formula
   depends_on "pkg-config" => :build
   depends_on "openssl"
   depends_on "python@3.9"
-  depends_on ""
 
   resource "bindings" do
     url "https://downloads.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.2.4/omniORBpy-4.2.4.tar.bz2"
