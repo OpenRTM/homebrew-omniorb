@@ -35,24 +35,20 @@ class OmniorbSsl < Formula
   end
 
   def install
-    pyincludes = `python3-config --includes`.chomp
-    pylib = `python3-config --ldflags`.chomp
-    brew_prefix=`brew --prefix`.chomp
-    args = %W[
-      CFLAGS=#{pyincludes}
-      LDFLAGS=#{pylib}
-      OPENSSL_CFLAGS=-I#{brew_prefix}/opt/openssl/include
-      OEPNSSL_LIBS=-L#{brew_prefix}/opt/openssl/lib
-      PYTHON=#{brew_prefix}/opt/python@3.9/bin/python3.9
-      CC=gcc
-      CXX=g++
-    ]
-    system "./configure", "--prefix=#{prefix}", "--with-openssl=#{brew_prefix}/opt/openssl", *args
+    ENV.append "PYTHON", "#{Formula["python@3.9"].opt_bin}/python3"
+    ENV.append "CFLAGS", "-I#{Formula["python@3.9"].opt_include}"
+    ENV.append "LDFLAGS", "-L#{Formula["python@3.9"].opt_lib}"
+    ENV.append "OPENSSL_CFLAGS", "-I#{Formula["openssl@1.1"].opt_include}"
+    ENV.append "OEPNSSL_LIBS", "-L#{Formula["openssl@1.1"].opt_lib}"
+    ENV.append "CC", "gcc"
+    ENV.append "CXX", "g++"
+
+    system "./configure", "--prefix=#{prefix}", "--with-openssl=#{Formula["openssl@1.1"].opt_prefix}"
     system "make", "-j", "4"
     system "make", "install"
 
     resource("bindings").stage do
-      system "./configure", "--prefix=#{prefix}", "--with-openssl=#{brew_prefix}/opt/openssl", *args
+      system "./configure", "--prefix=#{prefix}", "--with-openssl={Formula["openssl@1.1"].opt_prefix}"
       system "make", "install"
     end
   end
