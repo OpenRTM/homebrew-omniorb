@@ -48,7 +48,7 @@ class OmniorbSsl < Formula
     system "make", "install"
 
     resource("bindings").stage do
-      system "./configure", "--prefix=#{prefix}", "--with-openssl={Formula["openssl@1.1"].opt_prefix}"
+      system "./configure", "--prefix=#{prefix}", "--with-openssl=#{Formula["openssl@1.1"].opt_prefix}"
       system "make", "install"
     end
   end
