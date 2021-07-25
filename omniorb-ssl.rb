@@ -35,22 +35,24 @@ class OmniorbSsl < Formula
   end
 
   def install
-    args = %w[
+    args = %W[
+      --prefix=#{prefix}
       PYTHON=#{Formula["python@3.9"].opt_bin}/python3
       CFLAGS=-I#{Formula["python@3.9"].opt_include}
       LDFLAGS=-L#{Formula["python@3.9"].opt_lib}
+      --with-openssl=#{Formula["openssl@1.1"].opt_prefix}
       OPENSSL_CFLAGS=-I#{Formula["openssl@1.1"].opt_include}
       OEPNSSL_LIBS=-L#{Formula["openssl@1.1"].opt_lib}
       CC=gcc
       CXX=g++
     ]
 
-    system "./configure", "--prefix=#{prefix}", "--with-openssl=#{Formula["openssl@1.1"].opt_prefix}", *args
+    system "./configure", *args
     system "make", "-j", "4"
     system "make", "install"
 
     resource("bindings").stage do
-      system "./configure", "--prefix=#{prefix}", "--with-openssl=#{Formula["openssl@1.1"].opt_prefix}", *args
+      system "./configure", *args
       system "make", "install"
     end
   end
