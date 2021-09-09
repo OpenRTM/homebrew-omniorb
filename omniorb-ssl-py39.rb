@@ -3,6 +3,11 @@
 #
 # Author: Noriaki Ando <Noriaki.Ando@gmail.com>
 # GitHub: https://github.com/OpenRTM/homebrew-omniorb
+#
+# This is the formula for omniORBpy on python3.9.
+# To use this formula/bottle, switch python3 into python3.9.
+# $ brew unlink python3 (unlink python 3.X != 3.9)
+# $ brew link python@3.9
 #============================================================
 class OmniorbSslPy39 < Formula
   desc "IOR and naming service utilities for omniORB with SSL"
