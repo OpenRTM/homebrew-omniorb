@@ -22,7 +22,7 @@ class OmniorbpyPy39 < Formula
   end
 
   depends_on "pkg-config" => :build
-  depends_on "omniorb-ssl"
+  depends_on "omniorb-ssl-py39"
   depends_on "python@3.9"
 
   def install
