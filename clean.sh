@@ -3,9 +3,11 @@
 formulas="
     omniorb-ssl-py38
     omniorb-ssl-py39
+    omniorb-ssl-py310
     omniorb-ssl
     omniorbpy-py38
     omniorbpy-py39
+    omniorbpy-py310
     omniorbpy"
 
 cleanup()

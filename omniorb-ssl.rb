@@ -27,7 +27,7 @@ class OmniorbSsl < Formula
 
   depends_on "pkg-config" => :build
   depends_on "openssl"
-  depends_on "python@3.9"
+  depends_on "python@3.10"
 
   resource "bindings" do
     url "https://downloads.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.2.4/omniORBpy-4.2.4.tar.bz2"
@@ -37,9 +37,9 @@ class OmniorbSsl < Formula
   def install
     args = %W[
       --prefix=#{prefix}
-      PYTHON=#{Formula["python@3.9"].opt_bin}/python3
-      CFLAGS=-I#{Formula["python@3.9"].opt_include}
-      LDFLAGS=-L#{Formula["python@3.9"].opt_lib}
+      PYTHON=#{Formula["python@3.10"].opt_bin}/python3
+      CFLAGS=-I#{Formula["python@3.10"].opt_include}
+      LDFLAGS=-L#{Formula["python@3.10"].opt_lib}
       --with-openssl=#{Formula["openssl@1.1"].opt_prefix}
       OPENSSL_CFLAGS=-I#{Formula["openssl@1.1"].opt_include}
       OEPNSSL_LIBS=-L#{Formula["openssl@1.1"].opt_lib}
@@ -59,5 +59,5 @@ class OmniorbSsl < Formula
 
   test do
     system "#{bin}/omniidl", "-bcxx", "-h"
-  end
+  endd
 end
