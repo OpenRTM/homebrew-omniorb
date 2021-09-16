@@ -37,7 +37,7 @@ class Omniorb < Formula
       --with-openssl=#{Formula["openssl@3"].opt_prefix}
       OPENSSL_CFLAGS=-I#{Formula["openssl@3"].opt_include}
       OEPNSSL_LIBS=-L#{Formula["openssl@3"].opt_lib}
-  ]
+    ]
     system "./configure", *args
     system "make", "-j", "4"
     system "make", "install"
