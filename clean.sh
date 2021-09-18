@@ -1,6 +1,7 @@
 #!/bin/bash
 
 formulas="
+    omniorb
     omniorb-ssl-py38
     omniorb-ssl-py39
     omniorb-ssl-py310
