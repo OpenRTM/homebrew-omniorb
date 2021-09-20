@@ -11,7 +11,7 @@ formulas="
     omniorbpy-py310
     omniorbpy"
 
-cleanup()
+brew_unlink()
 {
     for f in $formulas; do
         if test -d /usr/local/Cellar/$f ; then
@@ -23,4 +23,21 @@ cleanup()
     done
 }
 
-cleanup
+brew_uninstall()
+{
+    for f in $formulas; do
+        if test -d /usr/local/Cellar/$f ; then
+            echo brew uninstall --ignore-dependencies $f
+            brew uninstall $f
+        else
+            echo Keg $f not found, skipped
+        fi
+    done
+}
+
+if test "x$1" = "xuninstall" ; then
+    brew_uninstall
+else
+    brew_unlink
+fi
+

@@ -20,7 +20,7 @@ class Omniorb < Formula
   end
 
   depends_on "pkg-config" => :build
-  depends_on "openssl@3"
+  depends_on "openssl@1.1"
   depends_on "python@3.10"
 
   resource "bindings" do
@@ -31,12 +31,8 @@ class Omniorb < Formula
   def install
     args = %W[
       --prefix=#{prefix}
-      PYTHON=#{Formula["python@3.10"].opt_bin}/python3
-      CFLAGS=-I#{Formula["python@3.10"].opt_include}
-      LDFLAGS=-L#{Formula["python@3.10"].opt_lib}
-      --with-openssl=#{Formula["openssl@3"].opt_prefix}
-      OPENSSL_CFLAGS=-I#{Formula["openssl@3"].opt_include}
-      OEPNSSL_LIBS=-L#{Formula["openssl@3"].opt_lib}
+      PYTHON=#{Formula["python@3.9"].opt_bin}/python3
+      --with-openssl=#{Formula["openssl@1.1"].opt_prefix}
     ]
     system "./configure", *args
     system "make", "-j", "4"

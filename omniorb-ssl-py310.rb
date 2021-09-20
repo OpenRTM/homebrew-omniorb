@@ -40,11 +40,7 @@ class OmniorbSslPy310 < Formula
     args = %W[
       --prefix=#{prefix}
       PYTHON=#{Formula["python@3.10"].opt_bin}/python3
-      CFLAGS=-I#{Formula["python@3.10"].opt_include}
-      LDFLAGS=-L#{Formula["python@3.10"].opt_lib}
       --with-openssl=#{Formula["openssl@3"].opt_prefix}
-      OPENSSL_CFLAGS=-I#{Formula["openssl@3"].opt_include}
-      OEPNSSL_LIBS=-L#{Formula["openssl@3"].opt_lib}
     ]
     system "./configure", *args
     system "make", "-j", "4"
