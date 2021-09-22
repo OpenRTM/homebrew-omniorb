@@ -14,7 +14,8 @@ class OmniorbSslPy38 < Formula
   homepage "https://omniorb.sourceforge.io/"
   url "https://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.2.4/omniORB-4.2.4.tar.bz2"
   sha256 "28c01cd0df76c1e81524ca369dc9e6e75f57dc70f30688c99c67926e4bdc7a6f"
-  license "GPL-2.1"
+
+  license all_of: ["GPL-2.0-only", "LGPL-2.1-only"]
 
   livecheck do
     url :stable
@@ -23,12 +24,18 @@ class OmniorbSslPy38 < Formula
 
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.2.4/"
-    sha256 cellar: :any, catalina: "b477bda778c450910da6dcdccb0656a5f657429382eb7d1af4ab832d489dc18b"
+    rebuild 1
+    sha256 cellar: :any, catalina: "662c1a51316087fca68e4be987fc84b1ac6dc95504a4b95368bb5f66f0a02150"
   end
 
   depends_on "pkg-config" => :build
   depends_on "openssl@1.1"
   depends_on "python@3.8"
+
+  patch do
+    url "https://raw.githubusercontent.com/OpenRTM/homebrew-omniorb/master/Patches/omniorb_beforeautomake.mk.in.patch"
+    sha256 "bae401aa5980b1bb87fec7424c5ad977f13ced6ac04bb84aca2a546b9d82667f"
+  end
 
   resource "bindings" do
     url "https://downloads.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.2.4/omniORBpy-4.2.4.tar.bz2"
@@ -36,21 +43,18 @@ class OmniorbSslPy38 < Formula
   end
 
   def install
-    args = %w[
-      OPENSSL_CFLAGS=-I/usr/local/opt/openssl/include
-      OEPNSSL_LIBS=-L/usr/local/opt/openssl/lib
-      CFLAGS=-I/usr/local/opt/python@3.8/include
-      LDFLAGS=-L/usr/local/opt/python@3.8/lib
-      CC=gcc-4.9
-      CXX=g++-4.9
-      PYTHON=/usr/local/opt/python@3.8/bin/python3.8
+    args = %W[
+      --prefix=#{prefix}
+      PYTHON=#{Formula["python@3.8"].opt_bin}/python3
+      --with-openssl=#{Formula["openssl@1.1"].opt_prefix}
     ]
-    system "./configure", "--prefix=#{prefix}", "--with-openssl=/usr/local/opt/openssl", *args
+
+    system "./configure", *args
     system "make", "-j", "4"
     system "make", "install"
 
     resource("bindings").stage do
-      system "./configure", "--prefix=#{prefix}", "--with-openssl=/usr/local/opt/openssl", *args
+      system "./configure", *args
       system "make", "install"
     end
   end

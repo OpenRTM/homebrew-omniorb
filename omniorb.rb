@@ -23,6 +23,11 @@ class Omniorb < Formula
   depends_on "openssl@1.1"
   depends_on "python@3.10"
 
+  patch do
+    url "https://raw.githubusercontent.com/OpenRTM/homebrew-omniorb/master/Patches/omniorb_beforeautomake.mk.in.patch"
+    sha256 "bae401aa5980b1bb87fec7424c5ad977f13ced6ac04bb84aca2a546b9d82667f"
+  end
+
   resource "bindings" do
     url "https://downloads.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.2.4/omniORBpy-4.2.4.tar.bz2"
     sha256 "dae8d867559cc934002b756bc01ad7fabbc63f19c2d52f755369989a7a1d27b6"
@@ -31,7 +36,7 @@ class Omniorb < Formula
   def install
     args = %W[
       --prefix=#{prefix}
-      PYTHON=#{Formula["python@3.9"].opt_bin}/python3
+      PYTHON=#{Formula["python@3.10"].opt_bin}/python3
       --with-openssl=#{Formula["openssl@1.1"].opt_prefix}
     ]
     system "./configure", *args

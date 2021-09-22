@@ -14,7 +14,8 @@ class OmniorbSslPy310 < Formula
   homepage "https://omniorb.sourceforge.io/"
   url "https://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.2.4/omniORB-4.2.4.tar.bz2"
   sha256 "28c01cd0df76c1e81524ca369dc9e6e75f57dc70f30688c99c67926e4bdc7a6f"
-  license "GPL-2.1"
+
+  license all_of: ["GPL-2.0-only", "LGPL-2.1-only"]
 
   livecheck do
     url :stable
@@ -23,13 +24,18 @@ class OmniorbSslPy310 < Formula
 
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.2.4/"
-    rebuild 1
-    sha256 cellar: :any, catalina: "f47391af25b1c8dca1c52c472aabcfb2811a2b4a4f1da7e18820b2575ed0a4b5"
+    rebuild 2
+    sha256 cellar: :any, catalina: "b1c1a40e965d384503eb382bfb71a1c917d2585a78f21e65db46f72e0354ca7f"
   end
 
   depends_on "pkg-config" => :build
-  depends_on "openssl"
+  depends_on "openssl@1.1"
   depends_on "python@3.10"
+
+  patch do
+    url "https://raw.githubusercontent.com/OpenRTM/homebrew-omniorb/master/Patches/omniorb_beforeautomake.mk.in.patch"
+    sha256 "bae401aa5980b1bb87fec7424c5ad977f13ced6ac04bb84aca2a546b9d82667f"
+  end
 
   resource "bindings" do
     url "https://downloads.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.2.4/omniORBpy-4.2.4.tar.bz2"
@@ -42,6 +48,7 @@ class OmniorbSslPy310 < Formula
       PYTHON=#{Formula["python@3.10"].opt_bin}/python3
       --with-openssl=#{Formula["openssl@3"].opt_prefix}
     ]
+
     system "./configure", *args
     system "make", "-j", "4"
     system "make", "install"
