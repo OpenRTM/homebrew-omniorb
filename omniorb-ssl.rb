@@ -34,7 +34,7 @@ class OmniorbSsl < Formula
   depends_on "python@3.10"
 
   patch do
-    url "https://raw.githubusercontent.com/OpenRTM/homebrew-omniorb/master/Patches/omniorb_beforeautomake.mk.in.patch"
+    url "https://raw.githubusercontent.com/OpenRTM/homebrew-omniorb/master/Patches/omniorb_2.4.2.patch"
     sha256 "bae401aa5980b1bb87fec7424c5ad977f13ced6ac04bb84aca2a546b9d82667f"
   end
 
