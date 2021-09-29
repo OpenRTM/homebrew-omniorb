@@ -28,7 +28,7 @@ class OmniorbSslPy38 < Formula
     sha256 cellar: :any, catalina: "662c1a51316087fca68e4be987fc84b1ac6dc95504a4b95368bb5f66f0a02150"
     rebuild 2
     sha256 cellar: :any, arm64_big_sur: "c53dbfacd573750f581ae7c8aded9f38daf39f1c142be2e576d9104944765e32"
-    rebuild 2
+    rebuild 3
     sha256 cellar: :any, big_sur: "5c540cf3e01bf71eb3beaeee51c4e0e091d783c4ba39946ac941436da41dbea6"
   end
 
