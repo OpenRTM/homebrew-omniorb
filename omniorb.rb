@@ -25,7 +25,7 @@ class Omniorb < Formula
 
   patch do
     url "https://raw.githubusercontent.com/OpenRTM/homebrew-omniorb/master/Patches/omniorb_2.4.2.patch"
-    sha256 "bae401aa5980b1bb87fec7424c5ad977f13ced6ac04bb84aca2a546b9d82667f"
+    sha256 "243c5984e88754ae903e9e9819c26e052532134b64f47e9243f1f9d26ffffdbd"
   end
 
   resource "bindings" do
