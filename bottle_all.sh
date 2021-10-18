@@ -12,7 +12,9 @@ rename()
 {
     org_name=`grep Bottling bottle.txt| awk '{sub("gz\.\.\.","gz",$3);print $3;}'`
     new_name=`grep Bottling bottle.txt| awk '{sub("--","-",$3);sub("gz\.\.\.","gz",$3);print $3;}'`
+    sha_name=`echo $new_name | awk '{sub("tar.gz","sha256");print $1;}'`
     mv $org_name $new_name
+    mv bottle.txt $sha_name
 }
 
 brew install openssl@1.1

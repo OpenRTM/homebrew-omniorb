@@ -1,5 +1,7 @@
 #!/bin/bash
 
+brew_cellar=$(brew --cellar)
+
 formulas="
     omniorb
     omniorb-ssl-py38
@@ -14,7 +16,7 @@ formulas="
 brew_unlink()
 {
     for f in $formulas; do
-        if test -d /usr/local/Cellar/$f ; then
+        if test -d $brew_cellar/$f ; then
             echo brew unlink $f
             brew unlink $f
         else
@@ -26,7 +28,7 @@ brew_unlink()
 brew_uninstall()
 {
     for f in $formulas; do
-        if test -d /usr/local/Cellar/$f ; then
+        if test -d $brew_cellar/$f ; then
             echo brew uninstall --ignore-dependencies $f
             brew uninstall $f
         else
