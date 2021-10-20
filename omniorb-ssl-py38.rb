@@ -26,8 +26,8 @@ class OmniorbSslPy38 < Formula
     root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.2.4/"
     rebuild 4
     sha256 cellar: :any, catalina: "98676ad26138e773b464fdc05a70f41716a590c4ef1968e8d6eb075c68f6b8a4"
-    rebuild 2
-    sha256 cellar: :any, arm64_big_sur: "c53dbfacd573750f581ae7c8aded9f38daf39f1c142be2e576d9104944765e32"
+    rebuild 4
+    sha256 cellar: :any, arm64_big_sur: "590adf5cd6626c8880dc4d76a3f7f8bd09793ec7068f5904e96d496ab8d45255"
     rebuild 3
     sha256 cellar: :any, big_sur: "5c540cf3e01bf71eb3beaeee51c4e0e091d783c4ba39946ac941436da41dbea6"
   end

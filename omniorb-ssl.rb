@@ -28,8 +28,8 @@ class OmniorbSsl < Formula
     sha256 cellar: :any, catalina: "792be18059ed68b0c8ef5df0855a682681bfd4a6ce384180478fe51ae6a94cd9"
     rebuild 4
     sha256 cellar: :any, big_sur: "9e7c4d72a655775796f058607ade981bc2e0d799b5e089be434142cb7fb72c7d"
-    rebuild 4
-    sha256 cellar: :any, arm64_big_sur: "6182a8aa01891d69cbcdd270c2e727906c657dd92321a7d3e431657d43f22c81"
+    rebuild 5
+    sha256 cellar: :any, arm64_big_sur: "45002184fc3f53818e34af4f5968086ff6db6aa70fa7ffe4c1eccfa5ffe45eaa"
   end
 
   depends_on "pkg-config" => :build
