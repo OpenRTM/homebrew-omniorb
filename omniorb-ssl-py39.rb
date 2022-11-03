@@ -12,10 +12,10 @@
 class OmniorbSslPy39 < Formula
   desc "IOR and naming service utilities for omniORB with SSL"
   homepage "https://omniorb.sourceforge.io/"
-  url "https://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.2.4/omniORB-4.2.4.tar.bz2"
-  sha256 "28c01cd0df76c1e81524ca369dc9e6e75f57dc70f30688c99c67926e4bdc7a6f"
+  url "https://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.3.0/omniORB-4.3.0.tar.bz2"
+  sha256 "976045a2341f4e9a85068b21f4bd928993292933eeecefea372db09e0219eadd"
 
-  license any_of: ["GPL-2.0-only", "LGPL-2.1-only"]
+  license all_of: ["GPL-2.0-or-later", "LGPL-2.1-or-later"]
 
   livecheck do
     url :stable
@@ -23,44 +23,23 @@ class OmniorbSslPy39 < Formula
   end
 
   bottle do
-    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.2.4/"
-    rebuild 3
-    sha256 cellar: :any, catalina: "a9375f1be32ddbf2c0f47620c8eb05ee58ac2b70d38b18924fd98dd75805f887"
-    rebuild 2
-    sha256 cellar: :any, big_sur: "e649bbe715764fd37dfd9e19b0389bcdb7b566099acc11b9e2ce5da9d8d0484e"
-    rebuild 3
-    sha256 cellar: :any, arm64_big_sur: "b99ded392b05731e22c31d8c459231e1746b8b8bbab5388eadd0faf9ce072d1b"
+    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.0/"
   end
 
   depends_on "pkg-config" => :build
   depends_on "openssl@1.1"
   depends_on "python@3.9"
 
-  patch do
-    url "https://raw.githubusercontent.com/OpenRTM/homebrew-omniorb/master/Patches/omniorb_2.4.2.patch"
-    sha256 "243c5984e88754ae903e9e9819c26e052532134b64f47e9243f1f9d26ffffdbd"
-  end
-
-  resource "bindings" do
-    url "https://downloads.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.2.4/omniORBpy-4.2.4.tar.bz2"
-    sha256 "dae8d867559cc934002b756bc01ad7fabbc63f19c2d52f755369989a7a1d27b6"
-  end
-
   def install
     args = %W[
       --prefix=#{prefix}
-      PYTHON=#{Formula["python@3.9"].opt_bin}/python3
+      PYTHON=#{Formula["python@3.9"].opt_bin}/python3.9
       --with-openssl=#{Formula["openssl@1.1"].opt_prefix}
     ]
 
     system "./configure", *args
     system "make", "-j", "4"
     system "make", "install"
-
-    resource("bindings").stage do
-      system "./configure", *args
-      system "make", "install"
-    end
   end
 
   test do

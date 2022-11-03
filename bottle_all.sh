@@ -48,3 +48,10 @@ rename
 brew unlink omniorb-ssl-py310
 brew unlink python@3.10
 
+brew install python@3.11
+brew link python@3.11
+bottle omniorb-ssl
+rename
+brew unlink omniorb-ssl-py311
+brew unlink python@3.11
+

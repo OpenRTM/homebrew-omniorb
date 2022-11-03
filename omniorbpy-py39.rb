@@ -1,19 +1,19 @@
 #============================================================
-# omniORBpy formula for HomeBrew
+# omniORBpy (for python3.9) formula for HomeBrew
 #
 # Author: Noriaki Ando <Noriaki.Ando@gmail.com>
 # GitHub: https://github.com/OpenRTM/homebrew-omniorb
 #
 # This is the formula for omniORBpy on python3.9.
-# To use this formula/bottle, switch python3 into python3.9.
+# To use this formula/bottle, switch python3 into python 3.9.
 # $ brew unlink python3 (unlink python 3.X != 3.9)
 # $ brew link python@3.9
 #============================================================
 class OmniorbpyPy39 < Formula
   desc "IOR and naming service utilities for omniORBpy with SSL"
   homepage "https://omniorb.sourceforge.io/"
-  url "https://versaweb.dl.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.2.4/omniORBpy-4.2.4.tar.bz2"
-  sha256 "dae8d867559cc934002b756bc01ad7fabbc63f19c2d52f755369989a7a1d27b6"
+  url "https://downloads.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.3.0/omniORBpy-4.3.0.tar.bz2"
+  sha256 "fffcfdfc34fd6e2fcc45d803d7d5db5bd4d188a747ff9f82b3684a753e001b4d"
   license "GPL-2.1"
 
   livecheck do
@@ -22,9 +22,8 @@ class OmniorbpyPy39 < Formula
   end
 
   bottle do
-    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.2.4/"
-    rebuild 1
-    sha256 cellar: :any, catalina: "572fcfeae5d817353c0927ffe547ba941644de7aa0075f3dfd61878bab2f2707"
+    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.0/"
+    sha256 cellar: :any, arm64_ventura: "65c35f52888911b508abc8d67b1d079d658d7eb29433bfcbc9643dd86a179c95"
   end
 
   depends_on "pkg-config" => :build
@@ -32,22 +31,25 @@ class OmniorbpyPy39 < Formula
   depends_on "python@3.9"
 
   def install
-    args = %w[
-      OPENSSL_CFLAGS=-I/usr/local/opt/openssl/include
-      OEPNSSL_LIBS=-L/usr/local/opt/openssl/lib
-      CFLAGS=-I/usr/local/opt/python@3.9/include
-      LDFLAGS=-L/usr/local/opt/python@3.9/lib
-      CC=gcc-4.9
-      CXX=g++-4.9
-      PYTHON=/usr/local/opt/python@3.9/bin/python3.9
+#    args = %w[
+#      OPENSSL_CFLAGS=-I#{Formula["openssl@1.1"].opt_include}
+#      OEPNSSL_LIBS=-L#{Formula["openssl@1.1"].opt_lib}
+#      CFLAGS=-I#{Formula["python@3.9"].opt_inlcude}
+#      LDFLAGS=-L#{Formula["python@3.9"].opt_lib}
+#      CC=gcc-4.9
+#      CXX=g++-4.9
+#      PYTHON=#{Formula["python@3.9"].opt_bin}/python3.9
+#    ]
+    args = %W[
+      --disable-debug
+      --disable-dependency-tracking
+      --disable-silent-rules
+      --prefix=#{prefix}
+      --with-omniorb=#{Formula["omniorb-ssl-py39"].opt_prefix}
+      --with-openssl=#{Formula["openssl@1.1"].opt_prefix}
+      PYTHON=#{Formula["python@3.9"].opt_bin}/python3.9
     ]
-    system "./configure", "--disable-debug",
-                          "--disable-dependency-tracking",
-                          "--disable-silent-rules",
-                          "--prefix=#{prefix}",
-                          "--with-omniorb=/usr/local",
-                          "--with-openssl=/usr/local/opt/openssl",
-                          *args
+    system "./configure", *args
     system "make", "-j", "4"
     system "make", "install"
   end

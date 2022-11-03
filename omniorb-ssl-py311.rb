@@ -4,12 +4,12 @@
 # Author: Noriaki Ando <Noriaki.Ando@gmail.com>
 # GitHub: https://github.com/OpenRTM/homebrew-omniorb
 #
-# This is the formula for omniORB with python3.10.
-# To use this formula/bottle, switch python3 into python3.10.
-# $ brew unlink python3 (unlink python 3.X != 3.10)
-# $ brew link python@3.10
+# This is the formula for omniORB with python3.11.
+# To use this formula/bottle, switch python3 into python3.11.
+# $ brew unlink python3 (unlink python 3.X != 3.11)
+# $ brew link python@3.11
 #============================================================
-class OmniorbSslPy310 < Formula
+class OmniorbSslPy311 < Formula
   desc "IOR and naming service utilities for omniORB with SSL"
   homepage "https://omniorb.sourceforge.io/"
   url "https://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.3.0/omniORB-4.3.0.tar.bz2"
@@ -24,18 +24,17 @@ class OmniorbSslPy310 < Formula
 
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.0/"
-    sha256 cellar: :any, arm64_ventura: "381979e013f2a920f5816b9fe6bcf573a496306606b49aa485e5e188191d58ad"
+    sha256 cellar: :any, arm64_ventura: "1eb7b6d0fa1cdc893a6ee24721c714e74a2c2278037bdbb85f5616333134d80f"
   end
-
 
   depends_on "pkg-config" => :build
   depends_on "openssl@1.1"
-  depends_on "python@3.10"
+  depends_on "python@3.11"
 
   def install
     args = %W[
       --prefix=#{prefix}
-      PYTHON=#{Formula["python@3.10"].opt_bin}/python3.10
+      PYTHON=#{Formula["python@3.11"].opt_bin}/python3.11
       --with-openssl=#{Formula["openssl@1.1"].opt_prefix}
     ]
 

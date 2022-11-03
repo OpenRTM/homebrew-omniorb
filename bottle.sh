@@ -4,8 +4,8 @@ bottle()
 {
     brew update
     brew uninstall $1
-    brew install --build-bottle $1
-    brew bottle $1 | tee bottle.txt
+    brew install -v --build-bottle $1
+    brew bottle -v $1 | tee bottle.txt
 }
 
 rename()

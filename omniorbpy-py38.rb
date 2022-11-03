@@ -12,8 +12,8 @@
 class OmniorbpyPy38 < Formula
   desc "IOR and naming service utilities for omniORBpy with SSL"
   homepage "https://omniorb.sourceforge.io/"
-  url "https://versaweb.dl.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.2.4/omniORBpy-4.2.4.tar.bz2"
-  sha256 "dae8d867559cc934002b756bc01ad7fabbc63f19c2d52f755369989a7a1d27b6"
+  url "https://downloads.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.3.0/omniORBpy-4.3.0.tar.bz2"
+  sha256 "fffcfdfc34fd6e2fcc45d803d7d5db5bd4d188a747ff9f82b3684a753e001b4d"
   license "GPL-2.1"
 
   livecheck do
@@ -22,8 +22,8 @@ class OmniorbpyPy38 < Formula
   end
 
   bottle do
-    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.2.4/"
-    sha256 cellar: :any, catalina: "63592f05f70e89f59c07f4170a304f7a071a2d95813af8104a0bbb1e5af98df3"
+    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.0/"
+    sha256 cellar: :any, arm64_ventura: "6be4c8c960129e7e20cd5fc7c9214cf415aacbe84127e407651cecdee9970c52"
   end
 
   depends_on "pkg-config" => :build
@@ -31,22 +31,25 @@ class OmniorbpyPy38 < Formula
   depends_on "python@3.8"
 
   def install
-    args = %w[
-      OPENSSL_CFLAGS=-I/usr/local/opt/openssl/include
-      OEPNSSL_LIBS=-L/usr/local/opt/openssl/lib
-      CFLAGS=-I/usr/local/opt/python@3.8/include
-      LDFLAGS=-L/usr/local/opt/python@3.8/lib
-      CC=gcc-4.9
-      CXX=g++-4.9
-      PYTHON=/usr/local/opt/python@3.8/bin/python3.8
+#    args = %w[
+#      OPENSSL_CFLAGS=-I#{Formula["openssl@1.1"].opt_include}
+#      OEPNSSL_LIBS=-L#{Formula["openssl@1.1"].opt_lib}
+#      CFLAGS=-I#{Formula["python@3.8"].opt_inlcude}
+#      LDFLAGS=-L#{Formula["python@3.8"].opt_lib}
+#      CC=gcc-4.9
+#      CXX=g++-4.9
+#      PYTHON=#{Formula["python@3.8"].opt_bin}/python3.8
+#    ]
+    args = %W[
+      --disable-debug
+      --disable-dependency-tracking
+      --disable-silent-rules
+      --prefix=#{prefix}
+      --with-omniorb=#{Formula["omniorb-ssl-py38"].opt_prefix}
+      --with-openssl=#{Formula["openssl@1.1"].opt_prefix}
+      PYTHON=#{Formula["python@3.8"].opt_bin}/python3.8
     ]
-    system "./configure", "--disable-debug",
-                          "--disable-dependency-tracking",
-                          "--disable-silent-rules",
-                          "--prefix=#{prefix}",
-                          "--with-omniorb=/usr/local",
-                          "--with-openssl=/usr/local/opt/openssl",
-                          *args
+    system "./configure", *args
     system "make", "-j", "4"
     system "make", "install"
   end
