@@ -24,6 +24,7 @@ class OmniorbpyPy311 < Formula
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.0/"
     sha256 cellar: :any, arm64_ventura: "9693aceba645dd7668acc053d0eb4c737487689c7bdbe6606860de5c308bd5de"
+    sha256 cellar: :any, monterey: "13b589070e7304911cdc9296487b56bec0bca41cf638f18090ab096efa325d98"
   end
 
   depends_on "pkg-config" => :build
@@ -31,15 +32,6 @@ class OmniorbpyPy311 < Formula
   depends_on "python@3.11"
 
   def install
-#    args = %w[
-#      OPENSSL_CFLAGS=-I#{Formula["openssl@1.1"].opt_include}
-#      OEPNSSL_LIBS=-L#{Formula["openssl@1.1"].opt_lib}
-#      CFLAGS=-I#{Formula["python@3.11"].opt_inlcude}
-#      LDFLAGS=-L#{Formula["python@3.11"].opt_lib}
-#      CC=gcc-4.9
-#      CXX=g++-4.9
-#      PYTHON=#{Formula["python@3.11"].opt_bin}/python3.11
-#    ]
     args = %W[
       --disable-debug
       --disable-dependency-tracking
@@ -49,8 +41,12 @@ class OmniorbpyPy311 < Formula
       --with-openssl=#{Formula["openssl@1.1"].opt_prefix}
       PYTHON=#{Formula["python@3.11"].opt_bin}/python3.11
     ]
+    xy = "310"
+    inreplace "configure",
+      /am_cv_python_version=`.*`/,
+      "am_cv_python_version='#{xy}'"
     system "./configure", *args
-    system "make", "-j", "4"
+    ENV.deparallelize
     system "make", "install"
   end
 

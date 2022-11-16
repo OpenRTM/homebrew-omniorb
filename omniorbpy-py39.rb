@@ -24,7 +24,8 @@ class OmniorbpyPy39 < Formula
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.0/"
     sha256 cellar: :any, arm64_ventura: "65c35f52888911b508abc8d67b1d079d658d7eb29433bfcbc9643dd86a179c95"
-  end
+    sha256 cellar: :any, monterey: "d15d0170294bba1b976c8013f28537259b41613a9096046a668aeb159df82dd5"
+end
 
   depends_on "pkg-config" => :build
   depends_on "omniorb-ssl-py39"

@@ -17,41 +17,25 @@ rename()
     mv bottle.txt $sha_name
 }
 
+build()
+{
+    brew install $2
+    brew link $2
+    bottle $1
+    rename
+    brew unlink $1
+    brew unlink $2  
+}
+
 brew install openssl@1.1
 brew link openssl@1.1
 
-brew install python@3.8
-brew link python@3.8
-bottle omniorb-ssl-py38
-rename
-brew unlink omniorb-ssl-py38
-brew unlink python@3.8
+#build omniorb-ssl-py38 python@3.8
+#build omniorb-ssl-py39 python@3.9
+#build omniorb-ssl-py310 python@3.10
+#build omniorb-ssl-py311 python@3.11
 
-brew install python@3.9
-brew link python@3.9
-bottle omniorb-ssl-py39
-rename
-brew unlink omniorb-ssl-py39
-brew unlink python@3.9
-
-brew install python@3.10
-brew link python@3.10
-bottle omniorb-ssl-py310
-brew unlink omniorb-ssl-py310
-rename
-brew unlink python@3.10
-
-brew install python@3.10
-brew link python@3.10
-bottle omniorb-ssl
-rename
-brew unlink omniorb-ssl-py310
-brew unlink python@3.10
-
-brew install python@3.11
-brew link python@3.11
-bottle omniorb-ssl
-rename
-brew unlink omniorb-ssl-py311
-brew unlink python@3.11
-
+build omniorbpy-py38 python@3.8
+build omniorbpy-py39 python@3.9
+build omniorbpy-py310 python@3.10
+build omniorbpy-py311 python@3.11
