@@ -5,11 +5,13 @@ This is [homebrew](https://brew.sh/) tap repository for OpenSSL enabled omniORB/
 
 Currently the following versions of omniORBs are provided.
 
-- omniORB-4.3.1/omniORBpy-4.3.1
-  - on Python 3.8
+- omniORB-4.3.2/omniORBpy-4.3.2
   - on Python 3.9
   - on Python 3.10
   - on Python 3.11
+  - on Python 3.12
+  - on Python 3.13
+  
 
 Both omniORB and omniORBpy are included in one bottle. Since the omniidl depends
 on python, please select the appropriate bottles of omniORB/omniORBpy which
