@@ -87,7 +87,7 @@ $bottle_block"
 #---------------------------
 # Check number of args
 #---------------------------
-if [ $# -le 1 ]; then
+if [ $# -lt 1 ]; then
   echo "Usage: $0 <formulas> or <*.rb>"
   exit 1
 fi
