@@ -51,11 +51,12 @@ update_formula()
     new_bottle_blocks="$new_bottle_blocks
 $bottle_block"
   done
+  new_bottle_blocks=`echo "$new_bottle_blocks" | sed '/^$/d'`
 
   # modify bottle do block in the <arg>.rb file
   if [ -f "$rb_file" ]; then
     # extract bottle do block
-    existing_bottle_block=$(sed '/bottle do/,/end/!d; /bottle do/d; /end/d; /rebuild/d; /sha256/d;' "$rb_file")
+    existing_bottle_block=$(grep "root_url" "$rb_file")
 
     if [ -n "$existing_bottle_block" ]; then
       # replace version number
@@ -72,8 +73,8 @@ $bottle_block"
 
       # replace bottle block with new_bottle_blocks.tmp
       sed -i.bak "/bottle do/,/end/c\\
-  $new_bottle_blocks
-  " $rb_file
+$new_bottle_blocks
+" $rb_file
       echo "Updated bottle block in $rb_file"
     else
       echo "No existing bottle block found in $rb_file"
