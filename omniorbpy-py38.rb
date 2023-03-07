@@ -23,7 +23,8 @@ class OmniorbpyPy38 < Formula
 
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.0/"
-    sha256 cellar: :any, arm64_ventura: "6be4c8c960129e7e20cd5fc7c9214cf415aacbe84127e407651cecdee9970c52"
+    rebuild 1
+    sha256 cellar: :any, arm64_ventura: "7a9f0617b6fe449fa8cd4c2ae194c3f67620685a2b2acbd7f2b9daaaf8149c77"
     sha256 cellar: :any, monterey: "208bf5b5efaac2944bc06c9dfe44aa7b52a737e5bef46e5c74d4e9c8043b3d03"
   end
 
@@ -32,30 +33,27 @@ class OmniorbpyPy38 < Formula
   depends_on "python@3.8"
 
   def install
-#    args = %w[
-#      OPENSSL_CFLAGS=-I#{Formula["openssl@1.1"].opt_include}
-#      OEPNSSL_LIBS=-L#{Formula["openssl@1.1"].opt_lib}
-#      CFLAGS=-I#{Formula["python@3.8"].opt_inlcude}
-#      LDFLAGS=-L#{Formula["python@3.8"].opt_lib}
-#      CC=gcc-4.9
-#      CXX=g++-4.9
-#      PYTHON=#{Formula["python@3.8"].opt_bin}/python3.8
-#    ]
+    ENV["PYTHON"] = python3 = which("python3.8")
+    xy = Language::Python.major_minor_version python3
+    xy_short = xy.to_s.sub('.', '')
+    inreplace "configure",
+      /am_cv_python_version=`.*`/,
+      "am_cv_python_version='#{xy}'"
     args = %W[
       --disable-debug
       --disable-dependency-tracking
       --disable-silent-rules
       --prefix=#{prefix}
-      --with-omniorb=#{Formula["omniorb-ssl-py38"].opt_prefix}
+      --with-omniorb=#{Formula["omniorb-ssl-py#{xy_short}"].opt_prefix}
       --with-openssl=#{Formula["openssl@1.1"].opt_prefix}
-      PYTHON=#{Formula["python@3.8"].opt_bin}/python3.8
     ]
     system "./configure", *args
-    system "make", "-j", "4"
+    ENV.deparallelize
     system "make", "install"
   end
 
   test do
+    system "#{bin}/omniidl", "-h"
     system "#{bin}/omniidl", "-bpython", "-h"
   end
 end

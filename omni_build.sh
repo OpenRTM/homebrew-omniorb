@@ -31,11 +31,13 @@ brew install openssl@1.1
 brew link openssl@1.1
 
 #build omniorb-ssl-py38 python@3.8
-#build omniorb-ssl-py39 python@3.9
-#build omniorb-ssl-py310 python@3.10
-#build omniorb-ssl-py311 python@3.11
+#build omniorbpy-py38 python@3.8
 
-build omniorbpy-py38 python@3.8
-build omniorbpy-py39 python@3.9
+#build omniorb-ssl-py39 python@3.9
+#build omniorbpy-py39 python@3.9
+
+#build omniorb-ssl-py310 python@3.10
 build omniorbpy-py310 python@3.10
-build omniorbpy-py311 python@3.11
+
+#build omniorb-ssl-py311 python@3.11
+#build omniorbpy-py311 python@3.11

@@ -24,7 +24,8 @@ class OmniorbSslPy38 < Formula
 
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.0/"
-    sha256 cellar: :any, arm64_ventura: "0ad8355b32ab8ead6a5b44e27f389db24bb58d0fc1ec9f58985ba64ef7572b23"
+    rebuild 1
+    sha256 cellar: :any, arm64_ventura: "3cb0c6afdec6cbfb2b22c76a62a46a0f12f5bd7a221f43022308046c245cc8ce"
     sha256 cellar: :any, monterey: "2ef679b32193e00147751c13baa5f3c356410f7e80410fb39cecac3fdf992097"
   end
 
@@ -33,18 +34,22 @@ class OmniorbSslPy38 < Formula
   depends_on "python@3.8"
 
   def install
+    ENV["PYTHON"] = python3 = which("python3.8")
+    xy = Language::Python.major_minor_version python3
+    inreplace "configure",
+              /am_cv_python_version=`.*`/,
+              "am_cv_python_version='#{xy}'"
     args = %W[
       --prefix=#{prefix}
-      PYTHON=#{Formula["python@3.8"].opt_bin}/python3.8
       --with-openssl=#{Formula["openssl@1.1"].opt_prefix}
     ]
-
     system "./configure", *args
     system "make", "-j", "4"
     system "make", "install"
   end
 
   test do
-    system "#{bin}/omniidl", "-bcxx", "-h"
+    system "#{bin}/omniidl", "-h"
+    system "#{bin}/omniidl", "-bcxx", "-u"
   end
 end

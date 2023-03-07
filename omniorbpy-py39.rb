@@ -23,7 +23,8 @@ class OmniorbpyPy39 < Formula
 
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.0/"
-    sha256 cellar: :any, arm64_ventura: "65c35f52888911b508abc8d67b1d079d658d7eb29433bfcbc9643dd86a179c95"
+    rebuild 1
+    sha256 cellar: :any, arm64_ventura: "0677911738fa8b038354da550036cb5268b274d218b9e5a4962f29d9a2f9c3a6"
     sha256 cellar: :any, monterey: "d15d0170294bba1b976c8013f28537259b41613a9096046a668aeb159df82dd5"
 end
 
@@ -32,30 +33,27 @@ end
   depends_on "python@3.9"
 
   def install
-#    args = %w[
-#      OPENSSL_CFLAGS=-I#{Formula["openssl@1.1"].opt_include}
-#      OEPNSSL_LIBS=-L#{Formula["openssl@1.1"].opt_lib}
-#      CFLAGS=-I#{Formula["python@3.9"].opt_inlcude}
-#      LDFLAGS=-L#{Formula["python@3.9"].opt_lib}
-#      CC=gcc-4.9
-#      CXX=g++-4.9
-#      PYTHON=#{Formula["python@3.9"].opt_bin}/python3.9
-#    ]
+    ENV["PYTHON"] = python3 = which("python3.9")
+    xy = Language::Python.major_minor_version python3
+    xy_short = xy.to_s.sub('.', '')
+    inreplace "configure",
+      /am_cv_python_version=`.*`/,
+      "am_cv_python_version='#{xy}'"
     args = %W[
       --disable-debug
       --disable-dependency-tracking
       --disable-silent-rules
       --prefix=#{prefix}
-      --with-omniorb=#{Formula["omniorb-ssl-py39"].opt_prefix}
+      --with-omniorb=#{Formula["omniorb-ssl-py#{xy_short}"].opt_prefix}
       --with-openssl=#{Formula["openssl@1.1"].opt_prefix}
-      PYTHON=#{Formula["python@3.9"].opt_bin}/python3.9
     ]
     system "./configure", *args
-    system "make", "-j", "4"
+    ENV.deparallelize
     system "make", "install"
   end
 
   test do
+    system "#{bin}/omniidl", "-h"
     system "#{bin}/omniidl", "-bpython", "-h"
   end
 end

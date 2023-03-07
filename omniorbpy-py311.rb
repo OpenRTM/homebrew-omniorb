@@ -23,8 +23,8 @@ class OmniorbpyPy311 < Formula
 
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.0/"
-    rebuild 1
-    sha256 cellar: :any, arm64_ventura: "a3d3524e91ea44905af0cd062a21d837fe2f8118b80580864412171e623524cf"
+    rebuild 2
+    sha256 cellar: :any, arm64_ventura: "de08ffa826f9b75f330b885f5c48c31bdc67498fa756b42f1e279e8dbcf61fb8"
     sha256 cellar: :any, monterey: "13b589070e7304911cdc9296487b56bec0bca41cf638f18090ab096efa325d98"
   end
 
@@ -35,6 +35,7 @@ class OmniorbpyPy311 < Formula
   def install
     ENV["PYTHON"] = python3 = which("python3.11")
     xy = Language::Python.major_minor_version python3
+    xy_short = xy.to_s.sub('.', '')
     inreplace "configure",
       /am_cv_python_version=`.*`/,
       "am_cv_python_version='#{xy}'"
@@ -43,9 +44,8 @@ class OmniorbpyPy311 < Formula
       --disable-dependency-tracking
       --disable-silent-rules
       --prefix=#{prefix}
-      --with-omniorb=#{Formula["omniorb-ssl-py311"].opt_prefix}
+      --with-omniorb=#{Formula["omniorb-ssl-py#{xy_short}"].opt_prefix}
       --with-openssl=#{Formula["openssl@1.1"].opt_prefix}
-      PYTHON=#{Formula["python@3.11"].opt_bin}/python3.11
     ]
     system "./configure", *args
     ENV.deparallelize

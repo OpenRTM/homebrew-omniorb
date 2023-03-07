@@ -24,8 +24,8 @@ class OmniorbSslPy311 < Formula
 
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.0/"
-    rebuild 1
-    sha256 cellar: :any, arm64_ventura: "44b066a22273b8ab3085a2f76013e6143eced7ff05efb35074e0817223b046da"
+    rebuild 2
+    sha256 cellar: :any, arm64_ventura: "e21229ebf9495730d20fddc2ad9afc8fe6c155c8d98e9719d2daeebc82679692"
     sha256 cellar: :any, monterey: "8040e58713431a95ab9122de84377d378e059ec2c3ab21fdc4b2d789d81d62de"
   end
 
@@ -41,7 +41,6 @@ class OmniorbSslPy311 < Formula
               "am_cv_python_version='#{xy}'"
     args = %W[
       --prefix=#{prefix}
-      PYTHON=#{Formula["python@3.11"].opt_bin}/python3.11
       --with-openssl=#{Formula["openssl@1.1"].opt_prefix}
     ]
     system "./configure", *args

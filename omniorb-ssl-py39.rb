@@ -24,7 +24,8 @@ class OmniorbSslPy39 < Formula
 
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.0/"
-    sha256 cellar: :any, arm64_ventura: "99374082384dfba4797db1689580a0f0696b6ca553aad086d50a90c1de057f3f"
+    rebuild 1
+    sha256 cellar: :any, arm64_ventura: "ff5f93005e5fe5a98f2b477048f9f4290673f3d9e3ea40c70183118f2cc89e7b"
     sha256 cellar: :any, monterey: "49188713e8316b327e0905e0d17c5a761322305e085bf11ead330038d564749c"
   end
 
@@ -33,18 +34,22 @@ class OmniorbSslPy39 < Formula
   depends_on "python@3.9"
 
   def install
+    ENV["PYTHON"] = python3 = which("python3.9")
+    xy = Language::Python.major_minor_version python3
+    inreplace "configure",
+              /am_cv_python_version=`.*`/,
+              "am_cv_python_version='#{xy}'"
     args = %W[
       --prefix=#{prefix}
-      PYTHON=#{Formula["python@3.9"].opt_bin}/python3.9
       --with-openssl=#{Formula["openssl@1.1"].opt_prefix}
     ]
-
     system "./configure", *args
     system "make", "-j", "4"
     system "make", "install"
   end
 
   test do
-    system "#{bin}/omniidl", "-bcxx", "-h"
+    system "#{bin}/omniidl", "-h"
+    system "#{bin}/omniidl", "-bcxx", "-u"
   end
 end
