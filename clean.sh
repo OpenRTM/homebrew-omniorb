@@ -3,15 +3,15 @@
 brew_cellar=$(brew --cellar)
 
 formulas="
-    omniorb
-    omniorb-ssl-py38
-    omniorb-ssl-py39
-    omniorb-ssl-py310
-    omniorb-ssl
     omniorbpy-py38
     omniorbpy-py39
     omniorbpy-py310
-    omniorbpy"
+    omniorbpy-py311
+    omniorb-ssl-py38
+    omniorb-ssl-py39
+    omniorb-ssl-py310
+    omniorb-ssl-py311
+    "
 
 brew_unlink()
 {
@@ -30,7 +30,7 @@ brew_uninstall()
     for f in $formulas; do
         if test -d $brew_cellar/$f ; then
             echo brew uninstall --ignore-dependencies $f
-            brew uninstall $f
+            brew uninstall --ignore-dependencies $f
         else
             echo Keg $f not found, skipped
         fi
