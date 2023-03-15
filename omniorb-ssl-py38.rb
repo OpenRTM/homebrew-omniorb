@@ -26,7 +26,8 @@ class OmniorbSslPy38 < Formula
     root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.0/"
     rebuild 1
     sha256 cellar: :any, arm64_ventura: "3cb0c6afdec6cbfb2b22c76a62a46a0f12f5bd7a221f43022308046c245cc8ce"
-    sha256 cellar: :any, monterey: "2ef679b32193e00147751c13baa5f3c356410f7e80410fb39cecac3fdf992097"
+    rebuild 2
+    sha256 cellar: :any, monterey: "834b6627841a03b78c235f33a1317eab681aac8e6f418408c14b95c55955e2e7"
   end
 
   depends_on "pkg-config" => :build
