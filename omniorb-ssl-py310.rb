@@ -4,10 +4,10 @@
 # Author: Noriaki Ando <Noriaki.Ando@gmail.com>
 # GitHub: https://github.com/OpenRTM/homebrew-omniorb
 #
-# This is the formula for omniORB with python3.10.
-# To use this formula/bottle, switch python3 into python3.10.
-# $ brew unlink python3 (unlink python 3.X != 3.10)
-# $ brew link python@3.10
+# This is the formula for omniORBpy on python3.10
+# To use this formula/bottle, switch python 3.x to python 3.10.
+# $ brew unlink python3.x (unlink current python)
+# $ brew link python@3.10 omniorb-ssl-y310
 #============================================================
 class OmniorbSslPy310 < Formula
   desc "IOR and naming service utilities for omniORB with SSL"
@@ -24,16 +24,18 @@ class OmniorbSslPy310 < Formula
 
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.0/"
-    rebuild 1
-    sha256 cellar: :any, arm64_ventura: "5d2269ae187bcf6cc2c98e5ed1a964304fb3097011997f64665a01c62791979a"
-    rebuild 2
-    sha256 cellar: :any, monterey: "a80433cc4b1b7835ff7d00f8c3fbee198e19c63491537fe527b8aebd3bae78a6"
+    sha256 cellar: :any, arm64_ventura: "32da9e9d6b190330e222170c37481d04ec4356907dba3bb597556036a74410c1"
+    sha256 cellar: :any, monterey: "834b6627841a03b78c235f33a1317eab681aac8e6f418408c14b95c55955e2e7"
   end
-
 
   depends_on "pkg-config" => :build
   depends_on "openssl@1.1"
   depends_on "python@3.10"
+
+  resource "bindings" do
+    url "https://downloads.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.3.0/omniORBpy-4.3.0.tar.bz2"
+    sha256 "fffcfdfc34fd6e2fcc45d803d7d5db5bd4d188a747ff9f82b3684a753e001b4d"
+  end
 
   def install
     ENV["PYTHON"] = python3 = which("python3.10")
@@ -48,10 +50,27 @@ class OmniorbSslPy310 < Formula
     system "./configure", *args
     system "make", "-j", "4"
     system "make", "install"
+
+    resource("bindings").stage do
+      inreplace "configure",
+                /am_cv_python_version=`.*`/,
+                "am_cv_python_version='#{xy}'"
+      args  = %W[
+        --disable-debug
+        --disable-dependency-tracking
+        --disable-silent-rules
+        --prefix=#{prefix}
+        --with-openssl=#{Formula["openssl@1.1"].opt_prefix}
+      ]
+      system "./configure", *args
+      ENV.deparallelize # omnipy.cc:392:44: error: use of undeclared identifier 'OMNIORBPY_DIST_DATE'
+      system "make", "install"
+    end
   end
 
   test do
     system "#{bin}/omniidl", "-h"
     system "#{bin}/omniidl", "-bcxx", "-u"
+    system "#{bin}/omniidl", "-bpython", "-u"
   end
 end

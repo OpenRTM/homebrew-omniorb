@@ -34,6 +34,7 @@ brew_uninstall()
         else
             echo Keg $f not found, skipped
         fi
+        brew cleanup -s $f
     done
 }
 
