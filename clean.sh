@@ -7,10 +7,6 @@ formulas="
     omniorbpy-py39
     omniorbpy-py310
     omniorbpy-py311
-    omniorb-ssl-py38
-    omniorb-ssl-py39
-    omniorb-ssl-py310
-    omniorb-ssl-py311
     "
 
 brew_unlink()

@@ -8,10 +8,7 @@ formulas="
     omniorb-ssl-py39
     omniorb-ssl-py310
     omniorb-ssl-py311
-    omniorbpy-py38
-    omniorbpy-py39
-    omniorbpy-py310
-    omniorbpy-py311"
+"
 
 brew_install()
 {
