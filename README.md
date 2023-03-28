@@ -5,16 +5,16 @@ This is [homebrew](https://brew.sh/) tap repository for OpenSSL enabled omniORB/
 
 Currently the following versions of omniORBs are provided.
 
-- omniORB-4.2.4
+- omniORB-4.3.0/omniORBpy-4.3.0
   - on Python 3.8
   - on Python 3.9
-- omniORBpy-4.2.4
-  - on Python 3.8
-  - on Python 3.9
+  - on Python 3.10
+  - on Python 3.11
 
-Since the omniidl depends on python, please select the appropriate
-bottles of omniORB/omniORBpy which support specific python versions.
-Current latest homebrew's python version is 3.9.
+Both omniORB and omniORBpy are included in one bottle. Since the omniidl depends
+on python, please select the appropriate bottles of omniORB/omniORBpy which
+support specific python versions. Current latest homebrew's python version is
+3.11.
 
 ## How to install
 
@@ -24,11 +24,9 @@ $ brew update
 $ brew install openssl
 $ brew link openssl
 $ brew uninstall omniorb
-$ brew install openrtm/omniorb/omniorb-ssl
-or
 $ brew install openrtm/omniorb/omniorb-ssl-pyXX
--> XX is the python version you want (py38 or py39)
-$ brew link omniorb-ssl
+-> XX is the python version you want (38, 39, 310 or 311)
+$ brew link omniorb-ssl-pyXY
 ```
 
 ### OpenRTM-aist (Python)
@@ -37,18 +35,15 @@ $ brew update
 $ brew install openssl
 $ brew link openssl
 $ brew uninstall omniorb
-$ brew install openrtm/omniorb/omniorbpy
-or
-$ brew install openrtm/omniorb/omniorbpy-pyXX
--> XX is the python version you want (py38 or py39)
-$ brew link omniorb-ssl
-$ brew link omniorbpy
+$ brew install openrtm/omniorb/omniorb-ssl-pyXX
+-> XX is the python version you want (38, 39, 310 or 311)
+$ brew link omniorb-ssl-pyXT
 ```
 
 
 ## How to build package (bottling)
 
 ```shell
-$ brew install --build-bottle openrtm/omniorb/omniorb-ssl
-$ brew bottle openrtm/omniorb/omniorb-ssl
+$ brew install --build-bottle openrtm/omniorb/omniorb-ssl-pyXY
+$ brew bottle openrtm/omniorb/omniorb-ssl-pyXY
 ```
