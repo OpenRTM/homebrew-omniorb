@@ -12,8 +12,8 @@
 class OmniorbSslPy39 < Formula
   desc "IOR and naming service utilities for omniORB with SSL"
   homepage "https://omniorb.sourceforge.io/"
-  url "https://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.3.0/omniORB-4.3.0.tar.bz2"
-  sha256 "976045a2341f4e9a85068b21f4bd928993292933eeecefea372db09e0219eadd"
+  url "https://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.3.1/omniORB-4.3.1.tar.bz2"
+  sha256 "0f42bc3eb737cae680dafa85b3ae3958e9f56a37912c5fb6b875933f8fb7390d"
 
   license all_of: ["GPL-2.0-only", "LGPL-2.1-only"]
 
@@ -24,7 +24,7 @@ class OmniorbSslPy39 < Formula
 
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.0/"
-    sha256 cellar: :any, arm64_ventura: "5c424c4d04751eeeebb411ac1b7124269a5d3bbcfb45fab40ccf22713fe00df4"
+    sha256 cellar: :any, arm64_ventura: "10abe7cc4d99fc5b48b7b19291e14d5cd154e77d8d2d76f048d29630768c729a"
     sha256 cellar: :any, monterey: "01bd16399388ec8c6591cc53696b8c2930b120d1ff3603fdd0514e6538901ac3"
   end
 
@@ -33,8 +33,8 @@ class OmniorbSslPy39 < Formula
   depends_on "python@3.9"
 
   resource "bindings" do
-    url "https://downloads.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.3.0/omniORBpy-4.3.0.tar.bz2"
-    sha256 "fffcfdfc34fd6e2fcc45d803d7d5db5bd4d188a747ff9f82b3684a753e001b4d"
+    url "https://downloads.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.3.1/omniORBpy-4.3.1.tar.bz2"
+    sha256 "9da34af0a0230ea0de793be73ee66dc8a87e732fec80437ea91222e272d01be2"
   end
 
   def install
