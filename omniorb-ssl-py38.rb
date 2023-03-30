@@ -23,7 +23,7 @@ class OmniorbSslPy38 < Formula
   end
 
   bottle do
-    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.0/"
+    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.1/"
     sha256 cellar: :any, arm64_ventura: "75a53e4aedcf45e4f1e9a72ed45b7d8c6dfbc25bae847b05cb41c8fe7f94692e"
     sha256 cellar: :any, monterey: "6a05a08bf43d8796621d54fceb9889b51086f66b3422a7119258b026a87bbabb"
   end

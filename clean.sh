@@ -1,42 +1,35 @@
 #!/bin/bash
 
-brew_cellar=$(brew --cellar)
+build=(
+    "omniorb-ssl-py38   python@3.8"
+    "omniorb-ssl-py39   python@3.9"
+    "omniorb-ssl-py310  python@3.10"
+    "omniorb-ssl-py311  python@3.11"
+)
 
-formulas="
-    omniorbpy-py38
-    omniorbpy-py39
-    omniorbpy-py310
-    omniorbpy-py311
-    "
-
-brew_unlink()
+cleanup()
 {
-    for f in $formulas; do
-        if test -d $brew_cellar/$f ; then
-            echo brew unlink $f
-            brew unlink $f
-        else
-            echo Keg $f not found, skipped
-        fi
+    for ((i=0; ${#build[*]}>$i; i++)) ; do
+        tmp=(${build[$i]})
+        echo "Cleanup: ${tmp[0]}"
+        brew unlink "${tmp[0]}"
+        brew remove --ignore-dependencies "${tmp[0]}"
+        brew cleanup -s "${tmp[0]}"
     done
 }
 
-brew_uninstall()
+install()
 {
-    for f in $formulas; do
-        if test -d $brew_cellar/$f ; then
-            echo brew uninstall --ignore-dependencies $f
-            brew uninstall --ignore-dependencies $f
-        else
-            echo Keg $f not found, skipped
-        fi
-        brew cleanup -s $f
+    for ((i=0; ${#build[*]}>$i; i++)) ; do
+        tmp=(${build[$i]})
+        echo "Installing: ${tmp[0]}"
+        brew install "${tmp[0]}"
+        brew unlink  "${tmp[0]}"
     done
+
 }
 
-if test "x$1" = "xuninstall" ; then
-    brew_uninstall
-else
-    brew_unlink
-fi
-
+#-----------
+# main
+#-----------
+cleanup
