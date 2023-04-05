@@ -35,34 +35,35 @@ bottling()
     brew unlink $2  
 }
 
-brew install openssl@1.1
-brew link openssl@1.1
+cleanup()
+{
+    for ((i=0; ${#build[*]}>$i; i++)) ; do
+        tmp=(${build[$i]})
+        echo "Cleanup: ${tmp[0]}"
+        brew unlink "${tmp[0]}"
+        brew remove --ignore-dependencies "${tmp[0]}"
+        brew cleanup -s "${tmp[0]}"
+    done
+}
 
+build()
+{
+    for ((i=0; ${#build[*]}>$i; i++)) ; do
+        tmp=(${build[$i]})
+        echo "bottling( ${tmp[0]} ${tmp[1]} )"
+        bottling ${tmp[0]} ${tmp[1]}
+    done
+}
 
 #-----------
 # main
 #-----------
-echo "Bottling the forllowing packages"
-
-for ((i=0; ${#build[*]}>$i; i++)) ; do
-    tmp=(${build[$i]})
-    echo "${tmp[0]}"
-    brew unlink "${tmp[0]}"
-    brew remove "${tmp[0]}"
-    brew cleanup -s "${tmp[0]}"
-done
-
-echo ""
 echo "Installing openssl@1.1"
-echo ""
 brew install openssl@1.1
 brew link openssl@1.1
 
-echo ""
+echo "Bottling the forllowing packages"
+cleanup
+
 echo "Bottling openrtm2-aist"
-echo ""
-for ((i=0; ${#build[*]}>$i; i++)) ; do
-    tmp=(${build[$i]})
-    echo "bottling( ${tmp[0]} ${tmp[1]} )"
-    bottling ${tmp[0]} ${tmp[1]}
-done
+build
