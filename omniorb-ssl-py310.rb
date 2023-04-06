@@ -25,7 +25,7 @@ class OmniorbSslPy310 < Formula
   bottle do
     root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.1/"
     sha256 cellar: :any, arm64_ventura: "3799767e566a27f30e76ca3cc5be93c8be1eec4402e9e640f7e291786b50abcb"
-    sha256 cellar: :any, monterey: "9e0cf00badcec4810c90f6f261a3c48d1661d1a274061b825ff7fe4efeed5fe7"
+    sha256 cellar: :any, monterey: "392dc69b9050617222686354465f4e365756595ec93cc5bc9746c03dbe449486"
   end
 
   depends_on "pkg-config" => :build
