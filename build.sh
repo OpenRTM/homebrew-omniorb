@@ -1,10 +1,12 @@
 #!/bin/bash
 
 build=(
-    "omniorb-ssl-py38   python@3.8"
+#    "omniorb-ssl-py38   python@3.8"
     "omniorb-ssl-py39   python@3.9"
     "omniorb-ssl-py310  python@3.10"
     "omniorb-ssl-py311  python@3.11"
+    "omniorb-ssl-py311  python@3.12"
+    "omniorb-ssl-py311  python@3.13"
 )
 
 
@@ -58,9 +60,9 @@ build()
 #-----------
 # main
 #-----------
-echo "Installing openssl@1.1"
-brew install openssl@1.1
-brew link openssl@1.1
+echo "Installing openssl@3"
+brew install openssl@3
+brew link openssl@3
 
 echo "Bottling the forllowing packages"
 cleanup
