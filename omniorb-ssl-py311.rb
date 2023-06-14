@@ -12,7 +12,7 @@
 class OmniorbSslPy310 < Formula
   desc "IOR and naming service utilities for omniORB with SSL"
   homepage "https://omniorb.sourceforge.io/"
-  url "https://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.3.1/omniORB-4.3.2.tar.bz2"
+  url "https://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.3.2/omniORB-4.3.2.tar.bz2"
   sha256 "1c745330d01904afd7a1ed0a5896b9a6e53ac1a4b864a48503b93c7eecbf1fa8"
 
   license all_of: ["GPL-2.0-only", "LGPL-2.1-only"]
@@ -23,7 +23,7 @@ class OmniorbSslPy310 < Formula
   end
 
   bottle do
-    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.1/"
+    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.2/"
     sha256 cellar: :any, arm64_ventura: "3799767e566a27f30e76ca3cc5be93c8be1eec4402e9e640f7e291786b50abcb"
     sha256 cellar: :any, monterey: "392dc69b9050617222686354465f4e365756595ec93cc5bc9746c03dbe449486"
   end
