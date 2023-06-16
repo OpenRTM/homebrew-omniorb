@@ -22,15 +22,16 @@ class OmniorbSslPy310 < Formula
     regex(%r{url=.*?/omniORB[._-]v?(\d+(?:\.\d+)+(?:-\d+)?)\.t}i)
   end
 
-  bottle do
-    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.2/"
-    sha256 cellar: :any, arm64_ventura: "3799767e566a27f30e76ca3cc5be93c8be1eec4402e9e640f7e291786b50abcb"
-    sha256 cellar: :any, monterey: "392dc69b9050617222686354465f4e365756595ec93cc5bc9746c03dbe449486"
-  end
+#  bottle do
+#    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.2/"
+#    sha256 cellar: :any, arm64_ventura: "3799767e566a27f30e76ca3cc5be93c8be1eec4402e9e640f7e291786b50abcb"
+#    sha256 cellar: :any, monterey: "392dc69b9050617222686354465f4e365756595ec93cc5bc9746c03dbe449486"
+#  end
 
   depends_on "pkg-config" => :build
   depends_on "openssl@3"
   depends_on "python@3.9"
+  uses_from_macos "zlib"
 
   resource "bindings" do
     url "https://downloads.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.3.2/omniORBpy-4.3.2.tar.bz2"
@@ -38,6 +39,8 @@ class OmniorbSslPy310 < Formula
   end
 
   def install
+    odie "bindings resource needs to be updated" if version != resource("bindings").version
+
     ENV["PYTHON"] = python3 = which("python3.9")
     xy = Language::Python.major_minor_version python3
     inreplace "configure",
@@ -53,7 +56,7 @@ class OmniorbSslPy310 < Formula
       inreplace "configure",
                 /am_cv_python_version=`.*`/,
                 "am_cv_python_version='#{xy}'"
-      system "./configure", *std_configure_arg
+      system "./configure", *std_configure_args
       ENV.deparallelize # omnipy.cc:392:44: error: use of undeclared identifier 'OMNIORBPY_DIST_DATE'
       system "make", "install"
     end
