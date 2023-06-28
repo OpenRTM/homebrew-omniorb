@@ -24,6 +24,7 @@ jobs:
 
       - name: Build project
         run: |
+          ls -R
           build.sh
 
   build-apple-silicon:
@@ -43,6 +44,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          ls -R
           brew install openssl@3
 
       - name: Build project
