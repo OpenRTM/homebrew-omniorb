@@ -21,11 +21,11 @@ jobs:
       - name: Install dependencies
         run: |
           brew install openssl@3
+          brew tap openrtm/omniorb
 
       - name: Build project
         run: |
-          ls -R
-          build.sh
+          ( cd usr/local/bin/brew/Library/Taps/openrtm/homebrew-omniorb ; bash build.sh )
 
   build-apple-silicon:
     name: omniORB Formula build on macOS (ARM64)
@@ -46,7 +46,8 @@ jobs:
         run: |
           ls -R
           brew install openssl@3
+          brew tap openrtm/omniorb
 
       - name: Build project
         run: |
-          build.sh
+          ( cd /opt/homebrew/Library/Taps/openrtm/homebrew-omniorb ; bash build.sh )
