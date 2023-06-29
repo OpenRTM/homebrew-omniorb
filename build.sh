@@ -1,8 +1,8 @@
 #!/bin/bash
 
 build=(
-#    "omniorb-ssl-py39   python@3.9"
-#    "omniorb-ssl-py310  python@3.10"
+    "omniorb-ssl-py39   python@3.9"
+    "omniorb-ssl-py310  python@3.10"
     "omniorb-ssl-py311  python@3.11"
     "omniorb-ssl-py312  python@3.12"
     "omniorb-ssl-py313  python@3.13"
@@ -40,6 +40,11 @@ cleanup()
 {
     for ((i=0; ${#build[*]}>$i; i++)) ; do
         tmp=(${build[$i]})
+        installed=`brew info ${tmp[0]} | grep Installed`
+        if test "x" = "x$installed" ; then
+             echo "Not installed: ${tmp[0]}. Do nothing."
+             continue
+        fi
         echo "Cleanup: ${tmp[0]}"
         brew unlink "${tmp[0]}"
         brew remove --ignore-dependencies "${tmp[0]}"
