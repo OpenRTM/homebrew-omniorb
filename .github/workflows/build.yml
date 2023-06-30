@@ -25,7 +25,7 @@ jobs:
 
       - name: Build project
         run: |
-          ( cd /usr/local/bin/brew/Library/Taps/openrtm/homebrew-omniorb ; bash build.sh )
+          ( cd /usr/local/Homebrew/Library/Taps/openrtm/homebrew-omniorb ; bash build.sh )
 
   build-apple-silicon:
     name: omniORB Formula build on macOS (ARM64)
