@@ -17,6 +17,7 @@ jobs:
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
           echo 'eval "$(/usr/local/bin/brew shellenv)"' >> $HOME/.zprofile
           eval "$(/usr/local/bin/brew shellenv)"
+          find /usr/local -type d
       
       - name: Install dependencies
         run: |
