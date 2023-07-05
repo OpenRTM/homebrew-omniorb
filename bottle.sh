@@ -3,7 +3,10 @@
 bottle()
 {
     brew update
-    brew uninstall $1
+    installed=`brew info $1 | grep Installed`
+    if test "x" != "x$installed" ; then
+        brew uninstall $1
+    fi
     brew install -v --build-bottle $1
     brew bottle -v $1 | tee bottle.txt
 }
