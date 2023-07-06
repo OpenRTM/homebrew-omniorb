@@ -5,7 +5,7 @@ on: [push]
 jobs:
   build:
     name: omniORB Formula build on macOS (x86_64)
-    runs-on: macos-latest
+    runs-on: macos-latest-large
 
     steps:
       - name: Checkout code
@@ -13,6 +13,7 @@ jobs:
 
       - name: Set up Homebrew
         run: |
+          uname -m
           echo "Setting up Homebrew for Intel"
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
           echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zprofile
