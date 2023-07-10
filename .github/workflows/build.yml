@@ -5,7 +5,7 @@ on: [push]
 jobs:
   build:
     name: omniORB Formula build on macOS (x86_64)
-    runs-on: macos-latest-large
+    runs-on: macos-latest
 
     steps:
       - name: Checkout code
