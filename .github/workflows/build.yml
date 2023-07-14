@@ -14,8 +14,6 @@ jobs:
       - name: Set up Homebrew
         run: |
           echo "Setting up Homebrew for Intel"
-
-#          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
           ls -R /usr/local/Homebrew/
           echo 'eval "$(/usr/local/bin/brew shellenv)"' >> $HOME/.zprofile
           eval "$(/usr/local/bin/brew shellenv)"
@@ -29,6 +27,7 @@ jobs:
         run: |
           ( cd /usr/local/Homebrew/Library/Taps/openrtm/homebrew-omniorb ; bash build.sh )
 
+#          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 #  build-arm64:
 #    name: omniORB Formula build on macOS (ARM64)
 #    runs-on: macos-latest
