@@ -14,7 +14,6 @@ jobs:
       - name: Set up Homebrew
         run: |
           echo "Setting up Homebrew for Intel"
-          ls -R /usr/local/Homebrew/
           echo 'eval "$(/usr/local/bin/brew shellenv)"' >> $HOME/.zprofile
           eval "$(/usr/local/bin/brew shellenv)"
       
