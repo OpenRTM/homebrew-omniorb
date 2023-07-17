@@ -3,33 +3,9 @@ name: omniORB Formula Build
 on: [push]
 
 jobs:
-  build-x86_64:
-    name: omniORB Formula build on macOS (x86_64)
-    runs-on: self-hosted
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Homebrew
-        run: |
-          echo "Setting up Homebrew for Intel"
-          echo 'eval "$(/usr/local/bin/brew shellenv)"' >> $HOME/.zprofile
-          eval "$(/usr/local/bin/brew shellenv)"
-      
-      - name: Install dependencies
-        run: |
-          brew install openssl@3
-          brew tap openrtm/omniorb
-
-      - name: Build project
-        run: |
-          ( cd /usr/local/Homebrew/Library/Taps/openrtm/homebrew-omniorb ; bash build.sh )
-
-#          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-#  build-arm64:
-#    name: omniORB Formula build on macOS (ARM64)
-#    runs-on: macos-latest
+#  build-x86_64:
+#    name: omniORB Formula build on macOS (x86_64)
+#    runs-on: self-hosted
 #
 #    steps:
 #      - name: Checkout code
@@ -37,23 +13,43 @@ jobs:
 #
 #      - name: Set up Homebrew
 #        run: |
-#          echo "Setting up Homebrew for Apple Silicon"
-#          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-#          echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zprofile
-#          eval "$(/opt/homebrew/bin/brew shellenv)"
-#
+#          echo "Setting up Homebrew for Intel"
+#          echo 'eval "$(/usr/local/bin/brew shellenv)"' >> $HOME/.zprofile
+#          eval "$(/usr/local/bin/brew shellenv)"
+#      
 #      - name: Install dependencies
 #        run: |
-#          brew install openssl@3
 #          brew tap openrtm/omniorb
 #
 #      - name: Build project
 #        run: |
-#          ( cd /opt/homebrew/Library/Taps/openrtm/homebrew-omniorb ; bash build.sh )
-#          ls -al
-#      
-#      - name: Upload artifact
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: omniorb-ssl-arm64
-#          path: dist/omniorb-ssl-arm64
+#          ( cd /usr/local/Homebrew/Library/Taps/openrtm/homebrew-omniorb ; bash build.sh )
+
+  build-arm64:
+    name: omniORB Formula build on macOS (ARM64)
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Homebrew
+        run: |
+          echo "Setting up Homebrew for Apple Silicon"
+          echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zprofile
+          eval "$(/opt/homebrew/bin/brew shellenv)"
+
+      - name: Install dependencies
+        run: |
+          brew tap openrtm/omniorb
+
+      - name: Build project
+        run: |
+          ( cd /opt/homebrew/Library/Taps/openrtm/homebrew-omniorb ; bash build.sh )
+          ls -al
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: omniorb-ssl-arm64
+          path: dist/omniorb-ssl-arm64
