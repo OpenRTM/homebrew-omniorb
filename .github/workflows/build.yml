@@ -45,7 +45,8 @@ jobs:
 
       - name: Build project
         run: |
-          ( cd /opt/homebrew/Library/Taps/openrtm/homebrew-omniorb ; bash build.sh )
+          cd /opt/homebrew/Library/Taps/openrtm/homebrew-omniorb
+          bash build.sh
           ls -al
       
       - name: Upload artifact
