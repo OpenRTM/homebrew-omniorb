@@ -22,9 +22,9 @@ bottle()
 
 rename()
 {
-    org_name=`grep Bottling bottle.txt| awk '{sub("gz\.\.\.","gz",$3);print $3;}'`
-    new_name=`grep Bottling bottle.txt| awk '{sub("--","-",$3);sub("gz\.\.\.","gz",$3);print $3;}'`
-    sha_name=`echo $new_name | awk '{sub("tar.gz","sha256");print $1;}'`
+    org_name=`grep Bottling bottle.txt| sed -n 's/.*\(omni.*\.gz\).*/\1/p'`
+    new_name=`echo $org_name | sed 's/--/-/'`
+    sha_name=`echo $new_name | sed 's/tar.gz/sha256/'`
     mv $org_name $new_name
     mv bottle.txt $sha_name
 }
@@ -68,8 +68,8 @@ build()
 # main
 #-----------
 echo "Installing openssl@3"
-brew install openssl@3
-brew link openssl@3
+#brew install openssl@3
+#brew link openssl@3
 
 echo "Bottling the forllowing packages"
 cleanup
