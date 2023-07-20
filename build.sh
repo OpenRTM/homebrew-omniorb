@@ -74,5 +74,5 @@ echo "Installing openssl@3"
 echo "Bottling the forllowing packages"
 cleanup
 
-echo "Bottling openrtm2-aist"
+echo "Bottling omniorb-ssl"
 build

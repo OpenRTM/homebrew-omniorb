@@ -47,9 +47,12 @@ jobs:
         run: |
           bash build.sh
           ls -al
+          mkdir dist
+          mv *.tar.gz dist
+          mv *.sha256 dist
       
-      - name: Upload artifact
+      - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: omniorb-ssl-arm64
-          path: dist/omniorb-ssl-arm64
+          path: dist/**
