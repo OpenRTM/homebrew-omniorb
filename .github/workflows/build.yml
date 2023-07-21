@@ -3,27 +3,35 @@ name: omniORB Formula Build
 on: [push]
 
 jobs:
-#  build-x86_64:
-#    name: omniORB Formula build on macOS (x86_64)
-#    runs-on: self-hosted
-#
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v3
-#
-#      - name: Set up Homebrew
-#        run: |
-#          echo "Setting up Homebrew for Intel"
-#          echo 'eval "$(/usr/local/bin/brew shellenv)"' >> $HOME/.zprofile
-#          eval "$(/usr/local/bin/brew shellenv)"
-#      
-#      - name: Install dependencies
-#        run: |
-#          brew tap openrtm/omniorb
-#
-#      - name: Build project
-#        run: |
-#          ( cd /usr/local/Homebrew/Library/Taps/openrtm/homebrew-omniorb ; bash build.sh )
+  build-x86_64:
+    name: omniORB Formula build on macOS (x86_64)
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Homebrew
+        run: |
+          echo "Setting up Homebrew for Intel"
+          echo 'eval "$(/usr/local/bin/brew shellenv)"' >> $HOME/.zprofile
+          eval "$(/usr/local/bin/brew shellenv)"
+      
+      - name: Install dependencies
+        run: |
+          brew tap openrtm/omniorb
+
+      - name: Build project
+        run: |
+          bash build.sh
+      
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: omniorb-ssl-x86_64
+          path: |
+            *.tar.gz
+            *.sha256
 
   build-arm64:
     name: omniORB Formula build on macOS (ARM64)
@@ -31,7 +39,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Homebrew
         run: |
@@ -46,13 +54,11 @@ jobs:
       - name: Build project
         run: |
           bash build.sh
-          ls -al
-          mkdir dist
-          mv *.tar.gz dist
-          mv *.sha256 dist
-      
+
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: omniorb-ssl-arm64
-          path: ./dist/
+          path: |
+            *.tar.gz
+            *.sha256
