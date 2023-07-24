@@ -22,11 +22,14 @@ class OmniorbSslPy311 < Formula
     regex(%r{url=.*?/omniORB[._-]v?(\d+(?:\.\d+)+(?:-\d+)?)\.t}i)
   end
 
-#  bottle do
-#    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.2/"
-#    sha256 cellar: :any, arm64_ventura: "3799767e566a27f30e76ca3cc5be93c8be1eec4402e9e640f7e291786b50abcb"
-#    sha256 cellar: :any, monterey: "392dc69b9050617222686354465f4e365756595ec93cc5bc9746c03dbe449486"
-#  end
+  bottle do
+    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.2/"
+    rebuild 1
+    sha256 cellar: :any, ventura: "c2f68a99801ccf13dd4609d1141043e8a9e4853538278ae90af6f0c5e8c30546"
+    rebuild 1
+    sha256 cellar: :any, arm64_sonoma: "59490a20f8b31b7e49f5495f22772006c9e53697acf20e3151845884bd1178e8"
+  end
+
 
   depends_on "pkg-config" => :build
   depends_on "openssl@3"
