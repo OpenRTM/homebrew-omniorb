@@ -23,7 +23,7 @@ class OmniorbSslPy310 < Formula
   end
 
   bottle do
-    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.2/"
+    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.2/
     rebuild 1
     sha256 cellar: :any, ventura: "f28813cf644f33b5054f4ea18a63beb377816d2ae8db5e5ab75e17efeadbbada"
     rebuild 1
