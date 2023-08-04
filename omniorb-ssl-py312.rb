@@ -27,8 +27,13 @@ class OmniorbSslPy312 < Formula
     rebuild 1
     sha256 cellar: :any, ventura: "90a96d19c699ab71b71358a3cdf8f13e08837624c92fe201256a66b5582e10a1"
     rebuild 1
+    sha256 cellar: :any, arm64_sequoia: "638a1ab44cbeb3cdf805e25f2a40900d29922ab2336a4d3f79075e762227a3fe"
+    rebuild 1
+    sha256 cellar: :any, arm64_ventura: "638a1ab44cbeb3cdf805e25f2a40900d29922ab2336a4d3f79075e762227a3fe"
+    rebuild 1
     sha256 cellar: :any, arm64_sonoma: "638a1ab44cbeb3cdf805e25f2a40900d29922ab2336a4d3f79075e762227a3fe"
   end
+
 
 
   depends_on "pkg-config" => :build
