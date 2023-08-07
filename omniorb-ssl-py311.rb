@@ -34,8 +34,6 @@ class OmniorbSslPy311 < Formula
     sha256 cellar: :any, arm64_ventura: "59490a20f8b31b7e49f5495f22772006c9e53697acf20e3151845884bd1178e8"
   end
 
-
-
   depends_on "pkg-config" => :build
   depends_on "openssl@3"
   depends_on "python@3.11"

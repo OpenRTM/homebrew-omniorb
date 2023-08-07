@@ -34,8 +34,6 @@ class OmniorbSslPy39 < Formula
     sha256 cellar: :any, arm64_sequoia: "cc5919d4bb4a6c3e6d4066002276ead2d30f58f070bd8095e399b2e8f5674c72"
   end
 
-
-
   depends_on "pkg-config" => :build
   depends_on "openssl@3"
   depends_on "python@3.9"
