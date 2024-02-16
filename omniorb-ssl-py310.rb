@@ -12,8 +12,8 @@
 class OmniorbSslPy310 < Formula
   desc "IOR and naming service utilities for omniORB with SSL"
   homepage "https://omniorb.sourceforge.io/"
-  url "https://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.3.2/omniORB-4.3.2.tar.bz2"
-  sha256 "1c745330d01904afd7a1ed0a5896b9a6e53ac1a4b864a48503b93c7eecbf1fa8"
+  url "https://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.3.4/omniORB-4.3.4.tar.bz2"
+  sha256 "79720d415d23cd8da99287a4ef4da0aa1bd34d3e4c7b1530715600adc5ed3dc3"
 
   license all_of: ["GPL-2.0-only", "LGPL-2.1-only"]
 
@@ -23,15 +23,7 @@ class OmniorbSslPy310 < Formula
   end
 
   bottle do
-    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.2/"
-    rebuild 1
-    sha256 cellar: :any, ventura: "f28813cf644f33b5054f4ea18a63beb377816d2ae8db5e5ab75e17efeadbbada"
-    rebuild 1
-    sha256 cellar: :any, arm64_sonoma: "c3e60b1058c9453d952e0f7b2c2d95371307aa19eccaea6e12706ceb10c1dcf2"
-    rebuild 1
-    sha256 cellar: :any, arm64_sequoia: "c3e60b1058c9453d952e0f7b2c2d95371307aa19eccaea6e12706ceb10c1dcf2"
-    rebuild 1
-    sha256 cellar: :any, arm64_ventura: "c3e60b1058c9453d952e0f7b2c2d95371307aa19eccaea6e12706ceb10c1dcf2"
+    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.4/"
   end
 
   depends_on "pkg-config" => :build
@@ -40,8 +32,8 @@ class OmniorbSslPy310 < Formula
   uses_from_macos "zlib"
 
   resource "bindings" do
-    url "https://downloads.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.3.2/omniORBpy-4.3.2.tar.bz2"
-    sha256 "cb5717d412a101baf430f598cac7d69231884dae4372d8e2adf3ddeebc5f7ebb"
+    url "https://downloads.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.3.4/omniORBpy-4.3.4.tar.bz2"
+    sha256 "a709c3c77b9c6b08616e1c9e12a5a9b9d5ccc1f2dcf6f647f205018d77f819a7"
   end
 
   def install
