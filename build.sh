@@ -1,9 +1,9 @@
 #!/bin/bash
 
 build=(
-    "omniorb-ssl-py310  python@3.10"
-    "omniorb-ssl-py311  python@3.11"
-    "omniorb-ssl-py312  python@3.12"
+#    "omniorb-ssl-py310  python@3.10"
+#    "omniorb-ssl-py311  python@3.11"
+#    "omniorb-ssl-py312  python@3.12"
     "omniorb-ssl-py313  python@3.13"
 #    "omniorb-ssl-py314  python@3.14"
 )

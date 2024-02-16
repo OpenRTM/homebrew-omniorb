@@ -23,7 +23,7 @@ class OmniorbSslPy313 < Formula
   end
 
   bottle do
-    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.2/"
+    root_url "https://github.com/OpenRTM/homebrew-omniorb/releases/download/4.3.4/"
   end
 
   depends_on "pkg-config" => :build
@@ -32,7 +32,7 @@ class OmniorbSslPy313 < Formula
   uses_from_macos "zlib"
 
   resource "bindings" do
-    url "https://downloads.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.3.2/omniORBpy-4.3.2.tar.bz2"
+    url "https://downloads.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.3.4/omniORBpy-4.3.4.tar.bz2"
     sha256 "a709c3c77b9c6b08616e1c9e12a5a9b9d5ccc1f2dcf6f647f205018d77f819a7"
   end
 
