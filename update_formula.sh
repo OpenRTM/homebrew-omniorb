@@ -26,7 +26,7 @@ update_formula()
   new_bottle_blocks=""
 
   # find .sha256 files and extract version number
-  sha256_files=$(find . -name "${arg}"-*.sha256 2> /dev/null)
+  sha256_files=$(find . -name "${arg}-*.sha256" 2> /dev/null)
   if [ -z "$sha256_files" ]; then
     echo "No .sha256 file found for ${arg}"
     exit 1
