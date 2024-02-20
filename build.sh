@@ -8,7 +8,6 @@ build=(
     "omniorb-ssl-py314  python@3.14"
 )
 
-
 bottle()
 {
     brew update
