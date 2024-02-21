@@ -3,9 +3,16 @@ name: omniORB Formula Build
 on: [push]
 
 jobs:
-  build-arm64:
-    name: omniORB Formula build on macOS (ARM64)
-    runs-on: macos-latest
+  build:
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: macos-15   # arm64 Sequoia
+            artifact_name: omniorb-ssl-arm64-sequoia
+          - os: macos-26   # arm64 Tahoe (macOS 26 = Tahoe)
+            artifact_name: omniorb-ssl-arm64-tahoe
 
     steps:
       - name: Checkout code
@@ -13,7 +20,6 @@ jobs:
 
       - name: Set up Homebrew
         run: |
-          echo "Setting up Homebrew for Apple Silicon"
           echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zprofile
           eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -28,7 +34,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: omniorb-ssl-arm64
+          name: ${{ matrix.artifact_name }}
           path: |
             *.tar.gz
             *.sha256
