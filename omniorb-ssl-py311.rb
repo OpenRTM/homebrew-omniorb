@@ -9,7 +9,7 @@
 # $ brew unlink python3.x (unlink current python)
 # $ brew link python@3.11 omniorb-ssl-y310
 #============================================================
-class OmniorbSslPy310 < Formula
+class OmniorbSslPy311 < Formula
   desc "IOR and naming service utilities for omniORB with SSL"
   homepage "https://omniorb.sourceforge.io/"
   url "https://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.3.2/omniORB-4.3.2.tar.bz2"
@@ -32,7 +32,7 @@ class OmniorbSslPy310 < Formula
   depends_on "openssl@3"
   depends_on "python@3.11"
   uses_from_macos "zlib"
-  
+
   resource "bindings" do
     url "https://downloads.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.3.2/omniORBpy-4.3.2.tar.bz2"
     sha256 "cb5717d412a101baf430f598cac7d69231884dae4372d8e2adf3ddeebc5f7ebb"
